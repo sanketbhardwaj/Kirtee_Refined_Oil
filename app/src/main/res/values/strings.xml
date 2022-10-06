@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Kirtee Refined Oil</string>
+    <string name="title_activity_home_screen">homeScreen</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Transaction</string>
+    <string name="title_notifications">Profile</string>
+</resources>
