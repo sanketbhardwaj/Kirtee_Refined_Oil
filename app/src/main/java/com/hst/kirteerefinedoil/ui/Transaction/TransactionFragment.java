@@ -23,10 +23,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.hst.kirteerefinedoil.Adapter_transaction;
-import com.hst.kirteerefinedoil.OrderHistory;
 import com.hst.kirteerefinedoil.R;
 import com.hst.kirteerefinedoil.Utilities.Constant;
 import com.hst.kirteerefinedoil.databinding.FragmentTransactionBinding;
+import com.hst.kirteerefinedoil.modelOrderHistory;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +39,7 @@ import java.util.Map;
 public class TransactionFragment extends Fragment {
     Adapter_transaction adapter;
     RequestQueue requestQueue;
-    ArrayList<OrderHistory> dm = new ArrayList<OrderHistory>();
+    ArrayList<modelOrderHistory> dm = new ArrayList<modelOrderHistory>();
     String uid, client_name;
     int flag = 0;
     String mobile, client_uid;
@@ -94,7 +94,7 @@ public class TransactionFragment extends Fragment {
 
                                 if (applist != null && applist.length() > 0) {
                                     for (int i = 0; i < applist.length(); i++) {
-                                        OrderHistory ds = new OrderHistory();
+                                        modelOrderHistory ds = new modelOrderHistory();
                                         JSONObject jsonObject = applist.getJSONObject(i);
 
                                         ds.setInvoiceNo(jsonObject.getString("invoiceNo"));

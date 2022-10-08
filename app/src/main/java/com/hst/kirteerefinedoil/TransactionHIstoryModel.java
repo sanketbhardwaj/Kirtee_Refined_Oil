@@ -5,18 +5,18 @@ import java.util.List;
 
 public class TransactionHIstoryModel {
 
-    private List<OrderHistory> orderHistory = null;
+    private List<modelOrderHistory> modelOrderHistory = null;
 
-    public List<OrderHistory> getOrderHistory() {
-        return orderHistory;
+    public List<modelOrderHistory> getOrderHistory() {
+        return modelOrderHistory;
     }
 
-    public void setOrderHistory(List<OrderHistory> orderHistory) {
-        this.orderHistory = orderHistory;
+    public void setOrderHistory(List<modelOrderHistory> modelOrderHistory) {
+        this.modelOrderHistory = modelOrderHistory;
     }
 
-    public TransactionHIstoryModel withOrderHistory(List<OrderHistory> orderHistory) {
-        this.orderHistory = orderHistory;
+    public TransactionHIstoryModel withOrderHistory(List<modelOrderHistory> modelOrderHistory) {
+        this.modelOrderHistory = modelOrderHistory;
         return this;
     }
 

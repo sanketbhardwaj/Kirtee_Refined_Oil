@@ -4,14 +4,14 @@ package com.hst.kirteerefinedoil;
 import java.util.List;
 
 public class Offerlist {
-    private List<Offer> offerList = null;
+    private List<modelOffer> modelOfferList = null;
 
-    public List<Offer> getOfferList() {
-        return offerList;
+    public List<modelOffer> getOfferList() {
+        return modelOfferList;
     }
 
-    public void setOfferList(List<Offer> offerList) {
-        this.offerList = offerList;
+    public void setOfferList(List<modelOffer> modelOfferList) {
+        this.modelOfferList = modelOfferList;
     }
 
 }

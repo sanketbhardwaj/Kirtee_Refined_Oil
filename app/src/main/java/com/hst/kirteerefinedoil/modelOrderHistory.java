@@ -3,7 +3,7 @@ package com.hst.kirteerefinedoil;
 
 import java.util.List;
 
-public class OrderHistory {
+public class modelOrderHistory {
     private String orderUid;
     private String date;
     private String invoiceNo;
@@ -39,7 +39,7 @@ public class OrderHistory {
         this.orderUid = orderUid;
     }
 
-    public OrderHistory withOrderUid(String orderUid) {
+    public modelOrderHistory withOrderUid(String orderUid) {
         this.orderUid = orderUid;
         return this;
     }
@@ -52,7 +52,7 @@ public class OrderHistory {
         this.date = date;
     }
 
-    public OrderHistory withDate(String date) {
+    public modelOrderHistory withDate(String date) {
         this.date = date;
         return this;
     }
@@ -65,7 +65,7 @@ public class OrderHistory {
         this.invoiceNo = invoiceNo;
     }
 
-    public OrderHistory withInvoiceNo(String invoiceNo) {
+    public modelOrderHistory withInvoiceNo(String invoiceNo) {
         this.invoiceNo = invoiceNo;
         return this;
     }
@@ -78,7 +78,7 @@ public class OrderHistory {
         this.paymentType = paymentType;
     }
 
-    public OrderHistory withPaymentType(String paymentType) {
+    public modelOrderHistory withPaymentType(String paymentType) {
         this.paymentType = paymentType;
         return this;
     }
@@ -91,7 +91,7 @@ public class OrderHistory {
         this.coupon = coupon;
     }
 
-    public OrderHistory withCoupon(String coupon) {
+    public modelOrderHistory withCoupon(String coupon) {
         this.coupon = coupon;
         return this;
     }
@@ -104,7 +104,7 @@ public class OrderHistory {
         this.subTotal = subTotal;
     }
 
-    public OrderHistory withSubTotal(String subTotal) {
+    public modelOrderHistory withSubTotal(String subTotal) {
         this.subTotal = subTotal;
         return this;
     }
@@ -117,7 +117,7 @@ public class OrderHistory {
         this.discountAmount = discountAmount;
     }
 
-    public OrderHistory withDiscountAmount(Integer discountAmount) {
+    public modelOrderHistory withDiscountAmount(Integer discountAmount) {
         this.discountAmount = discountAmount;
         return this;
     }
@@ -130,7 +130,7 @@ public class OrderHistory {
         this.grandPricePaid = grandPricePaid;
     }
 
-    public OrderHistory withGrandPricePaid(String grandPricePaid) {
+    public modelOrderHistory withGrandPricePaid(String grandPricePaid) {
         this.grandPricePaid = grandPricePaid;
         return this;
     }
@@ -143,7 +143,7 @@ public class OrderHistory {
         this.rounded = rounded;
     }
 
-    public OrderHistory withRounded(Double rounded) {
+    public modelOrderHistory withRounded(Double rounded) {
         this.rounded = rounded;
         return this;
     }
@@ -156,7 +156,7 @@ public class OrderHistory {
         this.grandTotal = grandTotal;
     }
 
-    public OrderHistory withGrandTotal(Double grandTotal) {
+    public modelOrderHistory withGrandTotal(Double grandTotal) {
         this.grandTotal = grandTotal;
         return this;
     }
@@ -169,7 +169,7 @@ public class OrderHistory {
         this.gst = gst;
     }
 
-    public OrderHistory withGst(Double gst) {
+    public modelOrderHistory withGst(Double gst) {
         this.gst = gst;
         return this;
     }
@@ -182,7 +182,7 @@ public class OrderHistory {
         this.cgst = cgst;
     }
 
-    public OrderHistory withCgst(Double cgst) {
+    public modelOrderHistory withCgst(Double cgst) {
         this.cgst = cgst;
         return this;
     }
@@ -195,7 +195,7 @@ public class OrderHistory {
         this.sgst = sgst;
     }
 
-    public OrderHistory withSgst(Double sgst) {
+    public modelOrderHistory withSgst(Double sgst) {
         this.sgst = sgst;
         return this;
     }
@@ -208,7 +208,7 @@ public class OrderHistory {
         this.orderStatus = orderStatus;
     }
 
-    public OrderHistory withOrderStatus(String orderStatus) {
+    public modelOrderHistory withOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
         return this;
     }
@@ -221,7 +221,7 @@ public class OrderHistory {
         this.deliveredTime = deliveredTime;
     }
 
-    public OrderHistory withDeliveredTime(String deliveredTime) {
+    public modelOrderHistory withDeliveredTime(String deliveredTime) {
         this.deliveredTime = deliveredTime;
         return this;
     }
@@ -234,7 +234,7 @@ public class OrderHistory {
         this.cancelledTime = cancelledTime;
     }
 
-    public OrderHistory withCancelledTime(String cancelledTime) {
+    public modelOrderHistory withCancelledTime(String cancelledTime) {
         this.cancelledTime = cancelledTime;
         return this;
     }
@@ -247,7 +247,7 @@ public class OrderHistory {
         this.refundTime = refundTime;
     }
 
-    public OrderHistory withRefundTime(String refundTime) {
+    public modelOrderHistory withRefundTime(String refundTime) {
         this.refundTime = refundTime;
         return this;
     }
@@ -260,7 +260,7 @@ public class OrderHistory {
         this.address = address;
     }
 
-    public OrderHistory withAddress(String address) {
+    public modelOrderHistory withAddress(String address) {
         this.address = address;
         return this;
     }
@@ -273,7 +273,7 @@ public class OrderHistory {
         this.city = city;
     }
 
-    public OrderHistory withCity(String city) {
+    public modelOrderHistory withCity(String city) {
         this.city = city;
         return this;
     }
@@ -286,7 +286,7 @@ public class OrderHistory {
         this.pincode = pincode;
     }
 
-    public OrderHistory withPincode(String pincode) {
+    public modelOrderHistory withPincode(String pincode) {
         this.pincode = pincode;
         return this;
     }
@@ -299,7 +299,7 @@ public class OrderHistory {
         this.state = state;
     }
 
-    public OrderHistory withState(String state) {
+    public modelOrderHistory withState(String state) {
         this.state = state;
         return this;
     }
@@ -312,7 +312,7 @@ public class OrderHistory {
         this.transactionId = transactionId;
     }
 
-    public OrderHistory withTransactionId(String transactionId) {
+    public modelOrderHistory withTransactionId(String transactionId) {
         this.transactionId = transactionId;
         return this;
     }
@@ -325,7 +325,7 @@ public class OrderHistory {
         this.paymentStatus = paymentStatus;
     }
 
-    public OrderHistory withPaymentStatus(String paymentStatus) {
+    public modelOrderHistory withPaymentStatus(String paymentStatus) {
         this.paymentStatus = paymentStatus;
         return this;
     }
@@ -338,7 +338,7 @@ public class OrderHistory {
         this.invoice = invoice;
     }
 
-    public OrderHistory withInvoice(String invoice) {
+    public modelOrderHistory withInvoice(String invoice) {
         this.invoice = invoice;
         return this;
     }
@@ -351,7 +351,7 @@ public class OrderHistory {
         this.items = items;
     }
 
-    public OrderHistory withItems(List<Item> items) {
+    public modelOrderHistory withItems(List<Item> items) {
         this.items = items;
         return this;
     }

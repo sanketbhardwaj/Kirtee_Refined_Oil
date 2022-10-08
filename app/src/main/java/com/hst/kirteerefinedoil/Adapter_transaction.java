@@ -12,10 +12,10 @@ import java.util.ArrayList;
 
 public class Adapter_transaction extends RecyclerView.Adapter<Adapter_transaction.MyViewHolder> {
     private final Context context;
-    private ArrayList<OrderHistory> data = new ArrayList<>();
+    private ArrayList<modelOrderHistory> data = new ArrayList<>();
 
 
-    public Adapter_transaction(Context context, ArrayList<OrderHistory> data) {
+    public Adapter_transaction(Context context, ArrayList<modelOrderHistory> data) {
         this.context = context;
         this.data = data;
 
@@ -30,7 +30,7 @@ public class Adapter_transaction extends RecyclerView.Adapter<Adapter_transactio
     @Override
     public void onBindViewHolder(MyViewHolder viewHolder, int i) {
         viewHolder.itemView.setTag(data.get(i));
-        final OrderHistory d = data.get(i);
+        final modelOrderHistory d = data.get(i);
         viewHolder.date.setText(d.getDate());
         viewHolder.invoice_no.setText(d.getInvoiceNo());
         viewHolder.invoice_amt.setText(d.getGrandPricePaid());

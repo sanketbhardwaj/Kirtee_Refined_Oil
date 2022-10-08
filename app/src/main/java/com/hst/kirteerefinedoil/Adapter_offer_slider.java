@@ -17,9 +17,9 @@ import java.util.ArrayList;
 
 public class Adapter_offer_slider extends PagerAdapter {
     Context mContext;
-    private ArrayList<Offer> data = new ArrayList<>();
+    private ArrayList<modelOffer> data = new ArrayList<>();
 
-    public Adapter_offer_slider(Context mContext, ArrayList<Offer> data) {
+    public Adapter_offer_slider(Context mContext, ArrayList<modelOffer> data) {
         this.mContext = mContext;
         this.data = data;
 

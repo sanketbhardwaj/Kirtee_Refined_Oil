@@ -1,6 +1,7 @@
 package com.hst.kirteerefinedoil.ui.home;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -25,12 +26,13 @@ import com.android.volley.toolbox.Volley;
 import com.hst.kirteerefinedoil.Adapter_offer_slider;
 import com.hst.kirteerefinedoil.Adapter_product_list;
 import com.hst.kirteerefinedoil.CartCount;
-import com.hst.kirteerefinedoil.Offer;
-import com.hst.kirteerefinedoil.Product;
 import com.hst.kirteerefinedoil.R;
 import com.hst.kirteerefinedoil.SplashScreen;
 import com.hst.kirteerefinedoil.Utilities.Constant;
+import com.hst.kirteerefinedoil.cartList;
 import com.hst.kirteerefinedoil.databinding.FragmentHomeBinding;
+import com.hst.kirteerefinedoil.modelOffer;
+import com.hst.kirteerefinedoil.modelProduct;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,8 +47,8 @@ public class HomeFragment extends Fragment implements CartCount {
     private static final long ANIM_VIEWPAGER_DELAY = 3000;
     private final boolean pagerMoved = false;
     private final Handler h = new Handler();
-    ArrayList<Product> dm1 = new ArrayList<Product>();
-    ArrayList<Offer> dm = new ArrayList<Offer>();
+    ArrayList<modelProduct> dm1 = new ArrayList<modelProduct>();
+    ArrayList<modelOffer> dm = new ArrayList<modelOffer>();
     RequestQueue requestQueue;
     private FragmentHomeBinding binding;
 
@@ -58,6 +60,12 @@ public class HomeFragment extends Fragment implements CartCount {
         binding.categoryDetailRv.setLayoutManager(mLayoutManager);
         binding.categoryDetailRv.setItemAnimator(new DefaultItemAnimator());
         //Login();
+        binding.cartCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), cartList.class));
+            }
+        });
         productList();
         return binding.getRoot();
     }
@@ -191,7 +199,7 @@ public class HomeFragment extends Fragment implements CartCount {
                                 JSONArray applist = j.getJSONArray("offerList");
                                 if (applist != null && applist.length() > 0) {
                                     for (int i = 0; i < applist.length(); i++) {
-                                        Offer ds = new Offer();
+                                        modelOffer ds = new modelOffer();
                                         JSONObject jsonObject = applist.getJSONObject(i);
                                         ds.setDate(jsonObject.getString("date"));
                                         ds.setCover(jsonObject.getString("cover"));
@@ -205,7 +213,7 @@ public class HomeFragment extends Fragment implements CartCount {
                                 JSONArray applists = j.getJSONArray("productList");
                                 if (applists != null && applists.length() > 0) {
                                     for (int i = 0; i < applists.length(); i++) {
-                                        Product ds = new Product();
+                                        modelProduct ds = new modelProduct();
                                         JSONObject jsonObject = applists.getJSONObject(i);
                                         ds.setProductUid(jsonObject.getString("productUid"));
                                         ds.setDate(jsonObject.getString("date"));
@@ -266,23 +274,6 @@ public class HomeFragment extends Fragment implements CartCount {
 
     }
 
-    private final Runnable animateViewPager = new Runnable() {
-        @Override
-        public void run() {
-
-            if (!pagerMoved) {
-
-                if (binding.viewpage.getCurrentItem() == binding.viewpage.getChildCount()) {
-                    binding.viewpage.setCurrentItem(0, true);
-                } else {
-                    binding.viewpage.setCurrentItem(binding.viewpage.getCurrentItem() + 1, true);
-                }
-
-                h.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
-            }
-        }
-    };
-
     private void NetworkDialog1() {
         final Dialog dialogs = new Dialog(getContext());
         dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -304,6 +295,23 @@ public class HomeFragment extends Fragment implements CartCount {
     public void cartCount(String text) {
         Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
     }
+
+    private final Runnable animateViewPager = new Runnable() {
+        @Override
+        public void run() {
+
+            if (!pagerMoved) {
+
+                if (binding.viewpage.getCurrentItem() == binding.viewpage.getChildCount()) {
+                    binding.viewpage.setCurrentItem(0, true);
+                } else {
+                    binding.viewpage.setCurrentItem(binding.viewpage.getCurrentItem() + 1, true);
+                }
+
+                h.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
+            }
+        }
+    };
 
 
 }

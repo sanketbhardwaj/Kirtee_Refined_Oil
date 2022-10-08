@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.hst.kirteerefinedoil.Utilities.Constant;
 
 import org.json.JSONException;
@@ -29,14 +31,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Adapter_product_list extends RecyclerView.Adapter<Adapter_product_list.MyViewHolder> {
-    public static String Cart_count;
     private final Context context;
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
     CartCount cartCount; //listener custom
-    private ArrayList<Product> data = new ArrayList<>();
+    private ArrayList<modelProduct> data = new ArrayList<>();
 
-    public Adapter_product_list(Context context, ArrayList<Product> data, CartCount cartCount) {
+    public Adapter_product_list(Context context, ArrayList<modelProduct> data, CartCount cartCount) {
         this.context = context;
         this.data = data;
         this.cartCount = cartCount;
@@ -52,14 +53,15 @@ public class Adapter_product_list extends RecyclerView.Adapter<Adapter_product_l
     @Override
     public void onBindViewHolder(MyViewHolder viewHolder, int i) {
         viewHolder.itemView.setTag(data.get(i));
-        final Product d = data.get(i);
-        viewHolder.date.setText(d.getDate());
-        viewHolder.invoice_no.setText(d.getDescription());
-        viewHolder.invoice_amt.setText(d.getDate());
-        viewHolder.invoice_amt.setOnClickListener(new View.OnClickListener() {
+        final modelProduct d = data.get(i);
+        viewHolder.name.setText(d.getName());
+        viewHolder.description.setText(d.getDescription());
+        viewHolder.price.setText(d.getPrice());
+        Glide.with(context).load(data.get(i).getImg()).into(viewHolder.img);
+        viewHolder.addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Login(d.getProductUid());
+                addToCart(d.getProductUid());
             }
         });
     }
@@ -69,7 +71,7 @@ public class Adapter_product_list extends RecyclerView.Adapter<Adapter_product_l
         return data.size();
     }
 
-    public void Login(String productUid) {
+    public void addToCart(String productUid) {
         // Assigning Activity this to progress dialog.
         progressDialog = new ProgressDialog(context);
         // Showing progress dialog at user registration time.
@@ -79,7 +81,7 @@ public class Adapter_product_list extends RecyclerView.Adapter<Adapter_product_l
         // Creating Volley newRequestQueue .
         requestQueue = Volley.newRequestQueue(context);
         // Creating string request with post method.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.Add_Cart,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.ADD_CART,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
@@ -90,8 +92,8 @@ public class Adapter_product_list extends RecyclerView.Adapter<Adapter_product_l
                         try {
                             j = new JSONObject(ServerResponse);
                             String result = j.getString("result");
-                            Cart_count = j.getString("cartCount");
-                            cartCount.cartCount(Cart_count);
+                            //Cart_count = j.getString("cartCount");
+                            cartCount.cartCount(j.getString("cartCount"));
 
                             if (result.equals("Success")) {
                                 // If response matched then show the toast.
@@ -162,7 +164,7 @@ public class Adapter_product_list extends RecyclerView.Adapter<Adapter_product_l
             @Override
             public void onClick(View view) {
                 dialogs.dismiss();
-                Login(productUid);
+                addToCart(productUid);
 
             }
         });
@@ -170,17 +172,18 @@ public class Adapter_product_list extends RecyclerView.Adapter<Adapter_product_l
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView date, invoice_no, invoice_amt, payment_mode, payment_status, transaction_id, order_status;
+        public TextView name, description, price, addToCart;
+        ImageView img;
+
 
         public MyViewHolder(View view) {
             super(view);
-            date = itemView.findViewById(R.id.date);
-            invoice_no = itemView.findViewById(R.id.invoice_no);
-            invoice_amt = itemView.findViewById(R.id.invoice_amount);
-            payment_mode = itemView.findViewById(R.id.payment_mode);
-            payment_status = itemView.findViewById(R.id.payment_status);
-            transaction_id = itemView.findViewById(R.id.transaction_id);
-            order_status = itemView.findViewById(R.id.order_status);
+            name = itemView.findViewById(R.id.name);
+            description = itemView.findViewById(R.id.description);
+            price = itemView.findViewById(R.id.price);
+            img = itemView.findViewById(R.id.img);
+            addToCart = itemView.findViewById(R.id.addToCart);
+
 
         }
 

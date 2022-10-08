@@ -4,17 +4,17 @@ package com.hst.kirteerefinedoil;
 import java.util.List;
 
 public class ProductList {
-    private List<Product> productList = null;
+    private List<modelProduct> modelProductList = null;
     private String cartCount;
 
-    private List<Offer> offerList = null;
+    private List<modelOffer> modelOfferList = null;
 
-    public List<Product> getProductList() {
-        return productList;
+    public List<modelProduct> getProductList() {
+        return modelProductList;
     }
 
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
+    public void setProductList(List<modelProduct> modelProductList) {
+        this.modelProductList = modelProductList;
     }
 
     public String getCartCount() {
@@ -25,12 +25,12 @@ public class ProductList {
         this.cartCount = cartCount;
     }
 
-    public List<Offer> getOfferList() {
-        return offerList;
+    public List<modelOffer> getOfferList() {
+        return modelOfferList;
     }
 
-    public void setOfferList(List<Offer> offerList) {
-        this.offerList = offerList;
+    public void setOfferList(List<modelOffer> modelOfferList) {
+        this.modelOfferList = modelOfferList;
     }
 
 }

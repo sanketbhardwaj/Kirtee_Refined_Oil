@@ -1,7 +1,7 @@
 
 package com.hst.kirteerefinedoil;
 
-public class Offer {
+public class modelOffer {
 
     private String offerUid;
     private String date;
