@@ -1,9 +1,12 @@
 package com.hst.kirteerefinedoil;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,6 +41,24 @@ public class Adapter_transaction extends RecyclerView.Adapter<Adapter_transactio
         viewHolder.payment_status.setText(d.getPaymentStatus());
         viewHolder.transaction_id.setText(d.getTransactionId());
         viewHolder.order_status.setText(d.getOrderStatus());
+        viewHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, orderHistoryDetails.class);
+                intent.putExtra("items", d.getItems());
+                intent.putExtra("orderUid", d.getOrderUid());
+                context.startActivity(intent);
+            }
+        });
+        viewHolder.viewInvoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(d.getInvoice()));
+                context.startActivity(i);
+            }
+        });
+        // Toast.makeText(context, d.getItems(), Toast.LENGTH_SHORT).show();
 
     }
 
@@ -47,12 +68,15 @@ public class Adapter_transaction extends RecyclerView.Adapter<Adapter_transactio
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView date, invoice_no, invoice_amt, payment_mode, payment_status, transaction_id, order_status;
+        public TextView date, viewInvoice, invoice_no, invoice_amt, payment_mode, payment_status, transaction_id, order_status;
+        LinearLayout linearLayout;
 
         public MyViewHolder(View view) {
             super(view);
+            linearLayout = itemView.findViewById(R.id.linearLayout);
             date = itemView.findViewById(R.id.date);
             invoice_no = itemView.findViewById(R.id.invoice_no);
+            viewInvoice = itemView.findViewById(R.id.viewInvoice);
             invoice_amt = itemView.findViewById(R.id.invoice_amount);
             payment_mode = itemView.findViewById(R.id.payment_mode);
             payment_status = itemView.findViewById(R.id.payment_status);

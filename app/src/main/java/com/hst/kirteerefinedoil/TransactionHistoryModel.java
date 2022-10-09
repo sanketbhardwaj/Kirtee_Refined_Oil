@@ -3,7 +3,7 @@ package com.hst.kirteerefinedoil;
 
 import java.util.List;
 
-public class TransactionHIstoryModel {
+public class TransactionHistoryModel {
 
     private List<modelOrderHistory> modelOrderHistory = null;
 
@@ -15,7 +15,7 @@ public class TransactionHIstoryModel {
         this.modelOrderHistory = modelOrderHistory;
     }
 
-    public TransactionHIstoryModel withOrderHistory(List<modelOrderHistory> modelOrderHistory) {
+    public TransactionHistoryModel withOrderHistory(List<modelOrderHistory> modelOrderHistory) {
         this.modelOrderHistory = modelOrderHistory;
         return this;
     }

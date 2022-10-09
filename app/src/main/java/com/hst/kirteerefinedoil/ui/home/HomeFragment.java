@@ -198,6 +198,7 @@ public class HomeFragment extends Fragment implements CartCount {
                                 binding.cartCount.setText(j.getString("cartCount"));
                                 JSONArray applist = j.getJSONArray("offerList");
                                 if (applist != null && applist.length() > 0) {
+                                    dm.clear();
                                     for (int i = 0; i < applist.length(); i++) {
                                         modelOffer ds = new modelOffer();
                                         JSONObject jsonObject = applist.getJSONObject(i);
@@ -206,12 +207,14 @@ public class HomeFragment extends Fragment implements CartCount {
                                         ds.setOfferUid(jsonObject.getString("offerUid"));
                                         dm.add(ds);
                                     }
+
                                     Adapter_offer_slider adapter = new Adapter_offer_slider(getContext(), dm);
                                     binding.viewpage.setAdapter(adapter);
 
                                 }
                                 JSONArray applists = j.getJSONArray("productList");
                                 if (applists != null && applists.length() > 0) {
+                                    dm1.clear();
                                     for (int i = 0; i < applists.length(); i++) {
                                         modelProduct ds = new modelProduct();
                                         JSONObject jsonObject = applists.getJSONObject(i);

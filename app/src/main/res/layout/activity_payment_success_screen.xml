@@ -24,7 +24,9 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="14dp"
                 app:lottie_autoPlay="true"
-                app:lottie_rawRes="@raw/check" />
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/check"
+                app:lottie_scale="0.1" />
 
 
         </LinearLayout>
@@ -163,19 +165,21 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center_vertical"
-                                android:text="Service name"
+                                android:text="PAYMENT MODE"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/grey_40"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/paymentMode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:text="20, June 2017"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                 android:textColor="@color/grey_80"
                                 android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/form_name_success"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:text=""
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                                android:textColor="@color/grey_40" />
 
                         </LinearLayout>
 
@@ -198,10 +202,9 @@
                                 android:layout_width="100dp"
                                 android:layout_height="50dp"
                                 android:layout_gravity="right"
-                                android:layout_marginRight="-20dp"
                                 android:gravity="right"
                                 android:src="@drawable/logo"
-                                android:tint="@color/app_color">
+                                app:tint="@color/app_color">
 
                             </ImageView>
                         </LinearLayout>
@@ -212,44 +215,68 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_mlarge"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         android:padding="@dimen/spacing_middle">
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center_vertical"
-                                android:text="AMOUNT"
+                                android:text="AMOUNT PAID"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
                                 android:textColor="@color/grey_40" />
 
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="1" />
+
                             <TextView
-                                android:id="@+id/price_success"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center_vertical"
-                                android:text="₹1548.0"
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                                android:text="TRANSACTION ID"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                                android:textColor="@color/grey_40" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/amountPaid"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:text="20, June 2017"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/grey_80"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/transactionId"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:text="11:28 AM"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                 android:textColor="@color/grey_80"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:text="COMPLETED"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                            android:textColor="@color/grey_40" />
 
                     </LinearLayout>
 
@@ -265,7 +292,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
+                            android:gravity="center"
                             android:orientation="horizontal"
                             android:paddingLeft="@dimen/spacing_middle"
                             android:paddingTop="@dimen/spacing_large"
@@ -273,56 +300,17 @@
                             android:paddingBottom="@dimen/spacing_large">
 
 
-                            <View
-                                android:layout_width="@dimen/spacing_large"
-                                android:layout_height="0dp" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
+                            <Button
+                                android:id="@+id/done"
+                                android:layout_width="120dp"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
 
+                                android:background="@drawable/borderbutton"
+                                android:text="Done"
+                                android:textColor="#fff">
 
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:orientation="vertical">
+                            </Button>
 
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center_vertical"
-                                        android:text="Transaction id "
-                                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                                        android:textColor="@color/grey_80"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/transaction"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center_vertical"
-                                        android:text=" 1234"
-                                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                                        android:textColor="@color/grey_40" />
-
-
-                                </LinearLayout>
-
-                                <Button
-                                    android:id="@+id/done"
-                                    android:layout_width="120dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="@drawable/borderbutton"
-                                    android:text="Done"
-                                    android:textColor="#fff">
-
-                                </Button>
-
-                            </LinearLayout>
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>

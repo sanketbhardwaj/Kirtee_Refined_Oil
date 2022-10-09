@@ -12,5 +12,12 @@ public class Constant {
     public static final String ADD_ITEM = domain + "cartAddItem/index.php";
     public static final String MINUS_ITEM = domain + "cartMinusItem/index.php";
     public static final String REMOVE_ITEM = domain + "cartRemoveItem/index.php";
+    public static final String START_TRANSACTION = domain + "paytm/startTransaction.php";
+    public static final String CHECK_TRANSACTION = domain + "paytm/checkTransaction.php";
+    public static final String CHECK_COUPON = domain + "checkCoupon/index.php";
+    public static final String PLACE_ORDER = domain + "placeOrder/index.php";
+    public static final String CLEAR_CART = domain + "cartClearItem/index.php";
+    public static final String UPDATE_ADDRESS = domain + "updateAddress/index.php";
+    public static final String CANCEL_ORDER = domain + "orderCancel/index.php";
 
 }

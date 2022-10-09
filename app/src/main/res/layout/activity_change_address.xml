@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Change_Address">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -13,10 +14,69 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5sp"
         android:background="@color/white"
-        android:clickable="true"
         android:elevation="10dp"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="3"
+                android:src="@drawable/ic_user__4_" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/client_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hitesh Duseja"
+                    android:textColor="#717277"
+                    android:textSize="15sp"
+
+                    />
+
+                <TextView
+                    android:id="@+id/client_mobile1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8623882989"
+                    android:textColor="#A4A5AA"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="3"
+                android:src="@drawable/ic_delete"
+                android:visibility="gone" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="3"
+                android:src="@drawable/ic_check_mark__3_" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,12 +89,12 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1.8"
-                android:text="Invoice Number :"
+                android:text="Address :"
                 android:textColor="@color/invoice_number_color"
                 android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/invoice_no"
+            <EditText
+                android:id="@+id/address"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -56,12 +116,12 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1.8"
-                android:text="Invoice Amount :"
+                android:text="City :"
                 android:textColor="@color/invoice_number_color"
                 android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/invoice_amount"
+            <EditText
+                android:id="@+id/city"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -81,12 +141,12 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1.8"
-                android:text="Payment Status :"
+                android:text="Pincode :"
                 android:textColor="@color/invoice_number_color"
                 android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/payment_status"
+            <EditText
+                android:id="@+id/pincode"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -96,82 +156,6 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
-                android:text="Transaction Id :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/transaction_id"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": sakri"
-                android:textColor="@color/invoice_color"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
-                android:text="Order Status :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/order_status"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": sakri"
-                android:textColor="@color/invoice_color"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/quatation_status_txt"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
-                android:text="Payment mode :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14dp" />
-
-            <TextView
-                android:id="@+id/payment_mode"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": REQUEST BALANCE"
-                android:textColor="@color/invoice_color"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -185,12 +169,12 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
-                android:text="Placed On :"
+                android:text="State :"
                 android:textColor="@color/invoice_number_color"
                 android:textSize="14dp" />
 
-            <TextView
-                android:id="@+id/date"
+            <EditText
+                android:id="@+id/state"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="20dp"
@@ -201,7 +185,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/viewInvoice"
+                android:id="@+id/updateAddress"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
@@ -209,8 +193,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/text1"
                 android:gravity="center"
-                android:clickable="true"
-                android:text="View Invoice"
+                android:text="Update Address"
                 android:textColor="#FFFF"
                 android:textSize="12dp" />
         </LinearLayout>

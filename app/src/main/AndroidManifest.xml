@@ -15,6 +15,20 @@
         android:theme="@style/Theme.KirteeRefinedOil"
         tools:targetApi="31">
         <activity
+            android:name=".orderHistoryDetails"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Change_Address"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".cartList"
             android:exported="false">
             <meta-data

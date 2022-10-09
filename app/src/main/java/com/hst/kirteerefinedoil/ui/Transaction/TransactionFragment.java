@@ -97,14 +97,31 @@ public class TransactionFragment extends Fragment {
                                         modelOrderHistory ds = new modelOrderHistory();
                                         JSONObject jsonObject = applist.getJSONObject(i);
 
-                                        ds.setInvoiceNo(jsonObject.getString("invoiceNo"));
+                                        ds.setOrderUid(jsonObject.getString("orderUid"));
                                         ds.setDate(jsonObject.getString("date"));
-                                        ds.setGrandPricePaid(jsonObject.getString("grandPricePaid"));
+                                        ds.setInvoiceNo(jsonObject.getString("invoiceNo"));
                                         ds.setPaymentType(jsonObject.getString("paymentType"));
-                                        ds.setPaymentStatus(jsonObject.getString("paymentStatus"));
-                                        ds.setTransactionId(jsonObject.getString("transactionId"));
+                                        ds.setCoupon(jsonObject.getString("coupon"));
+                                        ds.setSubTotal(jsonObject.getString("subTotal"));
+                                        ds.setDiscountAmount(jsonObject.getString("discountAmount"));
+                                        ds.setGrandPricePaid(jsonObject.getString("grandPricePaid"));
+                                        ds.setRounded(jsonObject.getString("rounded"));
+                                        ds.setGrandTotal(jsonObject.getString("grandTotal"));
+                                        ds.setGst(jsonObject.getString("gst"));
+                                        ds.setCgst(jsonObject.getString("cgst"));
+                                        ds.setSgst(jsonObject.getString("sgst"));
                                         ds.setOrderStatus(jsonObject.getString("orderStatus"));
-
+                                        ds.setDeliveredTime(jsonObject.getString("deliveredTime"));
+                                        ds.setCancelledTime(jsonObject.getString("cancelledTime"));
+                                        ds.setRefundTime(jsonObject.getString("refundTime"));
+                                        ds.setAddress(jsonObject.getString("address"));
+                                        ds.setCity(jsonObject.getString("city"));
+                                        ds.setPincode(jsonObject.getString("pincode"));
+                                        ds.setState(jsonObject.getString("state"));
+                                        ds.setTransactionId(jsonObject.getString("transactionId"));
+                                        ds.setPaymentStatus(jsonObject.getString("paymentStatus"));
+                                        ds.setInvoice(jsonObject.getString("invoice"));
+                                        ds.setItems(jsonObject.getString("items"));
                                         dm.add(ds);
 
                                     }
