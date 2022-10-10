@@ -17,184 +17,69 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal"
-            android:visibility="gone">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight="3"
-                android:src="@drawable/ic_user__4_" />
+                android:id="@+id/img"
+                android:layout_width="80sp"
+                android:layout_height="80sp"
+                android:src="@drawable/logo" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
+                android:layout_marginTop="5dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/client_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hitesh Duseja"
-                    android:textColor="#717277"
-                    android:textSize="15sp"
-
-                    />
-
-                <TextView
-                    android:id="@+id/client_mobile1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="8623882989"
-                    android:textColor="#A4A5AA"
-                    android:textSize="11sp"
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_20dp"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1.8"
+                        android:text="Price :"
+                        android:textColor="@color/invoice_number_color"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/addToCart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="2.5"
+                        android:background="@drawable/text1"
+                        android:gravity="center"
+                        android:text="Add to Cart"
+                        android:textColor="#FFFF"
+                        android:textSize="12dp" />
+                </LinearLayout>
+
             </LinearLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight="3"
-                android:src="@drawable/ic_delete"
-                android:visibility="gone" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight="3"
-                android:src="@drawable/ic_check_mark__3_" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginTop="10sp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
-                android:text="Product Name :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": Canara"
-                android:textColor="@color/invoice_color"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
-                android:text="Description :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": INDB0026"
-                android:textColor="@color/invoice_color"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
-                android:text="Price :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/price"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": sakri"
-                android:textColor="@color/invoice_color"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
-                android:text="Transaction Id :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
-
-            <ImageView
-                android:id="@+id/img"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
-            android:visibility="visible">
-
-
-            <TextView
-                android:id="@+id/addToCart"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/text1"
-                android:gravity="center"
-                android:text="Add to Cart"
-                android:textColor="#FFFF"
-                android:textSize="12dp" />
-        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

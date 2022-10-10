@@ -41,6 +41,9 @@ public class Adapter_transaction extends RecyclerView.Adapter<Adapter_transactio
         viewHolder.payment_status.setText(d.getPaymentStatus());
         viewHolder.transaction_id.setText(d.getTransactionId());
         viewHolder.order_status.setText(d.getOrderStatus());
+        if (d.getOrderStatus().equals("Cancelled")) {
+            viewHolder.viewInvoice.setVisibility(View.INVISIBLE);
+        }
         viewHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

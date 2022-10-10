@@ -56,7 +56,7 @@ public class Adapter_product_list extends RecyclerView.Adapter<Adapter_product_l
         final modelProduct d = data.get(i);
         viewHolder.name.setText(d.getName());
         viewHolder.description.setText(d.getDescription());
-        viewHolder.price.setText(d.getPrice());
+        viewHolder.price.setText("₹ " + d.getPrice() + "/-");
         Glide.with(context).load(data.get(i).getImg()).into(viewHolder.img);
         viewHolder.addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,53 +81,51 @@ public class Adapter_product_list extends RecyclerView.Adapter<Adapter_product_l
         // Creating Volley newRequestQueue .
         requestQueue = Volley.newRequestQueue(context);
         // Creating string request with post method.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.ADD_CART,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String ServerResponse) {
-                        // Hiding the progress dialog after all task complete.
-                        progressDialog.dismiss();
-                        // Matching server responce message to our text.
-                        JSONObject j = null;
-                        try {
-                            j = new JSONObject(ServerResponse);
-                            String result = j.getString("result");
-                            //Cart_count = j.getString("cartCount");
-                            cartCount.cartCount(j.getString("cartCount"));
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.ADD_CART, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String ServerResponse) {
+                // Hiding the progress dialog after all task complete.
+                progressDialog.dismiss();
+                // Matching server responce message to our text.
+                JSONObject j = null;
+                try {
+                    j = new JSONObject(ServerResponse);
+                    String result = j.getString("result");
+                    //Cart_count = j.getString("cartCount");
+                    cartCount.cartCount(j.getString("cartCount"));
 
-                            if (result.equals("Success")) {
-                                // If response matched then show the toast.
-                                // Finish the current Login activity
+                    if (result.equals("Success")) {
+                        // If response matched then show the toast.
+                        // Finish the current Login activity
 
-                                AlertDialog.Builder alert = new AlertDialog.Builder(context);
-                                alert.setTitle("Notice");
-                                alert.setPositiveButton("OK", null);
-                                alert.setMessage(j.getString("status"));
-                                alert.show();
+                        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                        alert.setTitle("Notice");
+                        alert.setPositiveButton("OK", null);
+                        alert.setMessage(j.getString("status"));
+                        alert.show();
 
-                            } else {
-                                AlertDialog.Builder alert = new AlertDialog.Builder(context);
-                                alert.setTitle("Notice");
-                                alert.setMessage(j.getString("status"));
-                                alert.setPositiveButton("OK", null);
-                                alert.show();
+                    } else {
+                        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                        alert.setTitle("Notice");
+                        alert.setMessage(j.getString("status"));
+                        alert.setPositiveButton("OK", null);
+                        alert.show();
 
-                            }
-                        } catch (JSONException e) {
-                            //    Toast.makeText(Login_activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-
-                        }
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        // Hiding the progress dialog after all task complete.
-                        progressDialog.dismiss();
-                        NetworkDialog(productUid);
-                    }
-                }) {
+                } catch (JSONException e) {
+                    //    Toast.makeText(Login_activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                // Hiding the progress dialog after all task complete.
+                progressDialog.dismiss();
+                NetworkDialog(productUid);
+            }
+        }) {
 
 
             @Override
@@ -159,7 +157,7 @@ public class Adapter_product_list extends RecyclerView.Adapter<Adapter_product_l
         dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogs.setContentView(R.layout.networkdialog);
         dialogs.setCanceledOnTouchOutside(false);
-        Button done = (Button) dialogs.findViewById(R.id.done);
+        Button done = dialogs.findViewById(R.id.done);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

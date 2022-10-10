@@ -37,11 +37,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class cartList extends AppCompatActivity {
+    public static int clickedCount;
     ActivityCartListBinding activityCartListBinding;
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
     String grandPaidPrice, orderId, mid, txnToken, callBackUrl, paymentUrl, total, subTotal, discount, transactionId, gst, grandTotal, rounded;
-    int clickedCount;
     ArrayList<modelCart> dm = new ArrayList<modelCart>();
 
     @Override
@@ -73,6 +73,12 @@ public class cartList extends AppCompatActivity {
                 alert.show();
             }
         });
+        activityCartListBinding.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         getCartList();
         activityCartListBinding.pay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,30 +102,29 @@ public class cartList extends AppCompatActivity {
     }
 
     public void getCartList() {
-        progressDialog = new ProgressDialog(cartList.this);
+       /* progressDialog = new ProgressDialog(cartList.this);
         // Showing progress dialog at user registration time.
         progressDialog.setMessage("Please Wait");
-        progressDialog.show();
+        progressDialog.show();*/
         // Assigning Activity this to progress dialog.
         // Creating Volley newRequestQueue .
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         // Creating string request with post method.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.CART_LIST,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String ServerResponse) {
-                        JSONObject j = null;
-                        try {
-                            j = new JSONObject(ServerResponse);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.CART_LIST, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String ServerResponse) {
+                JSONObject j = null;
+                try {
+                    j = new JSONObject(ServerResponse);
 
-                            if (ServerResponse.length() == 21) {
+                    if (ServerResponse.length() == 21) {
 
-                            } else {
+                    } else {
                                 /*
                                  no_cutomers.setVisibility(View.GONE);
                                  */
-                                //Toast.makeText(getApplicationContext(), j.getString("cartList"), Toast.LENGTH_SHORT).show();
-                                // binding.cartCount.setText(j.getString("cartCount"));
+                        //Toast.makeText(getApplicationContext(), j.getString("cartList"), Toast.LENGTH_SHORT).show();
+                        // binding.cartCount.setText(j.getString("cartCount"));
                                 /*JSONArray applist = j.getJSONArray("cartList");
                                 if (applist != null && applist.length() > 0) {
                                     for (int i = 0; i < applist.length(); i++) {
@@ -134,85 +139,101 @@ public class cartList extends AppCompatActivity {
                                     binding.viewpage.setAdapter(adapter);
 
                                 }*/
-                                progressDialog.dismiss();
-                                activityCartListBinding.rounded.setText(j.getString("rounded"));
-                                rounded = j.getString("rounded");
-                                subTotal = j.getString("subTotal");
-                                gst = j.getString("gst");
-                                discount = j.getString("discount");
-                                grandPaidPrice = j.getString("grandTotalPrice");
-                                grandTotal = j.getString("grandTotal");
-                                total = j.getString("subTotal");
-                                activityCartListBinding.subTotal.setText(j.getString("subTotal"));
+                        // progressDialog.dismiss();
+                        rounded = j.getString("rounded");
+                        subTotal = j.getString("subTotal");
+                        gst = j.getString("gst");
+                        discount = j.getString("discount");
+                        grandPaidPrice = j.getString("grandTotalPrice");
+                        grandTotal = j.getString("grandTotal");
+                        total = j.getString("subTotal");
 
-                                activityCartListBinding.total.setText(j.getString("subTotal"));
-
-                                activityCartListBinding.grandTotal.setText(j.getString("grandTotal"));
-
-                                activityCartListBinding.grandTotalPrice.setText(j.getString("grandTotalPrice"));
-
-                                activityCartListBinding.totalItems.setText(j.getString("totalItems"));
-                                activityCartListBinding.totalQtys.setText(j.getString("totalQtys"));
-                                activityCartListBinding.discount.setText(j.getString("discount"));
-
-                                activityCartListBinding.gst.setText(j.getString("gst"));
-
-                                activityCartListBinding.cgst.setText(j.getString("cgst"));
-                                activityCartListBinding.sgst.setText(j.getString("sgst"));
-                                JSONArray applists = j.getJSONArray("cartList");
-
-                                if (applists != null && applists.length() > 0) {
-                                    for (int i = 0; i < applists.length(); i++) {
-                                        modelCart ds = new modelCart();
-                                        JSONObject jsonObject = applists.getJSONObject(i);
-                                        ds.setCartUid(jsonObject.getString("cartUid"));
-                                        ds.setDate(jsonObject.getString("date"));
-                                        ds.setItemUid(jsonObject.getString("itemUid"));
-                                        ds.setItemName(jsonObject.getString("itemName"));
-                                        //    Toast.makeText(cartList.this, jsonObject.getString("itemName").toString(), Toast.LENGTH_SHORT).show();
-                                        ds.setItemRate(jsonObject.getString("itemRate"));
-                                        ds.setItemPrice(jsonObject.getString("itemPrice"));
-                                        ds.setItemQty(jsonObject.getString("itemQty"));
-                                        ds.setItemLogo(jsonObject.getString("itemLogo"));
-                                        dm.add(ds);
-
-                                    }
-
-                                    Adapter_cart_list adapter = new Adapter_cart_list(cartList.this, dm, new CartCountChange() {
-                                        @Override
-                                        public void cartCountChange(String text) {
-                                            Toast.makeText(cartList.this, text, Toast.LENGTH_SHORT).show();
-
-                                            dm.clear();
-                                            getCartList();
-                                        }
-
-
-                                    });
-
-                                    activityCartListBinding.rvCartList.setAdapter(adapter);
-                                    if (!activityCartListBinding.coupon.getText().toString().isEmpty()) {
-                                        applyCoupon();
-                                    }
-
-                                }
-                            }
-
-                        } catch (JSONException e) {
-                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                            e.printStackTrace();
+                        if (!j.getString("rounded").equals("0")) {
+                            activityCartListBinding.rounded.setText("₹ " + j.getString("rounded") + "/-");
+                            activityCartListBinding.grandTotal.setText("₹ " + j.getString("grandTotal") + "/-");
+                        } else {
+                            activityCartListBinding.roundedLayout.setVisibility(View.GONE);
+                            activityCartListBinding.grandTotalLayout.setVisibility(View.GONE);
                         }
 
+
+                        activityCartListBinding.subTotal.setText(j.getString("subTotal"));
+
+                        activityCartListBinding.total.setText("₹ " + j.getString("subTotal") + "/-");
+
+
+                        activityCartListBinding.grandTotalPrice.setText("₹ " + j.getString("grandTotalPrice") + "/-");
+
+                        activityCartListBinding.totalItems.setText(j.getString("totalItems"));
+                        activityCartListBinding.totalQtys.setText(j.getString("totalQtys"));
+                        if (!j.getString("discount").equals("0")) {
+                            activityCartListBinding.discount.setText("₹ " + j.getString("discount") + "/-");
+                        } else {
+                            activityCartListBinding.discountLayout.setVisibility(View.GONE);
+                        }
+
+                        activityCartListBinding.pay.setText("PAY ₹ " + j.getString("grandTotalPrice") + "/-");
+                        activityCartListBinding.gst.setText("₹ " + j.getString("gst") + "/-");
+
+                        activityCartListBinding.cgst.setText(j.getString("cgst"));
+                        activityCartListBinding.sgst.setText(j.getString("sgst"));
+
+
+                        JSONArray applists = j.getJSONArray("cartList");
+
+                        if (applists != null && applists.length() > 0) {
+                            for (int i = 0; i < applists.length(); i++) {
+                                modelCart ds = new modelCart();
+                                JSONObject jsonObject = applists.getJSONObject(i);
+                                ds.setCartUid(jsonObject.getString("cartUid"));
+                                ds.setDate(jsonObject.getString("date"));
+                                ds.setItemUid(jsonObject.getString("itemUid"));
+                                ds.setItemName(jsonObject.getString("itemName"));
+                                //    Toast.makeText(cartList.this, jsonObject.getString("itemName").toString(), Toast.LENGTH_SHORT).show();
+                                ds.setItemRate(jsonObject.getString("itemRate"));
+                                ds.setItemPrice(jsonObject.getString("itemPrice"));
+                                ds.setItemQty(jsonObject.getString("itemQty"));
+                                ds.setItemLogo(jsonObject.getString("itemLogo"));
+                                dm.add(ds);
+
+                            }
+
+                            Adapter_cart_list adapter = new Adapter_cart_list(cartList.this, dm, new CartCountChange() {
+                                @Override
+                                public void cartCountChange(String text) {
+                                    //Toast.makeText(cartList.this, text, Toast.LENGTH_SHORT).show();
+
+                                    dm.clear();
+                                    getCartList();
+                                }
+
+
+                            });
+
+                            activityCartListBinding.rvCartList.setAdapter(adapter);
+                            if (!activityCartListBinding.coupon.getText().toString().isEmpty()) {
+                                applyCoupon();
+                            }
+                            activityCartListBinding.shimmerViewContainer.setVisibility(View.GONE);
+                        }
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        progressDialog.dismiss();
-                        NetworkDialog1();
-                    }
-                }) {
+
+                } catch (JSONException e) {
+                    // Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    activityCartListBinding.noCartList.setVisibility(View.VISIBLE);
+                    activityCartListBinding.shimmerViewContainer.setVisibility(View.GONE);
+                    activityCartListBinding.screenData.setVisibility(View.GONE);
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                progressDialog.dismiss();
+                NetworkDialog1();
+            }
+        }) {
 
             @Override
             protected Map<String, String> getParams() {
@@ -241,7 +262,7 @@ public class cartList extends AppCompatActivity {
         dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogs.setContentView(R.layout.networkdialog);
         dialogs.setCanceledOnTouchOutside(false);
-        Button done = (Button) dialogs.findViewById(R.id.done);
+        Button done = dialogs.findViewById(R.id.done);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -263,58 +284,56 @@ public class cartList extends AppCompatActivity {
         // Creating Volley newRequestQueue .
         requestQueue = Volley.newRequestQueue(cartList.this);
         // Creating string request with post method.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.START_TRANSACTION,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String ServerResponse) {
-                        // Hiding the progress dialog after all task complete.
-                        progressDialog.dismiss();
-                        // Matching server responce message to our text.
-                        JSONObject j = null;
-                        try {
-                            j = new JSONObject(ServerResponse);
-                            String result = j.getString("result");
-                            //Cart_count = j.getString("cartCount");
-                            //cartCount.cartCount(j.getString("cartCount"));
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.START_TRANSACTION, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String ServerResponse) {
+                // Hiding the progress dialog after all task complete.
+                progressDialog.dismiss();
+                // Matching server responce message to our text.
+                JSONObject j = null;
+                try {
+                    j = new JSONObject(ServerResponse);
+                    String result = j.getString("result");
+                    //Cart_count = j.getString("cartCount");
+                    //cartCount.cartCount(j.getString("cartCount"));
 
-                            if (result.equals("Success")) {
-                                // If response matched then show the toast.
-                                // Finish the current Login activity
-                                orderId = j.getString("orderId");
-                                mid = j.getString("mid");
-                                txnToken = j.getString("txnToken");
-                                callBackUrl = j.getString("callBackUrl");
-                                paymentUrl = j.getString("paymentUrl");
-                                PaytmGateway();
+                    if (result.equals("Success")) {
+                        // If response matched then show the toast.
+                        // Finish the current Login activity
+                        orderId = j.getString("orderId");
+                        mid = j.getString("mid");
+                        txnToken = j.getString("txnToken");
+                        callBackUrl = j.getString("callBackUrl");
+                        paymentUrl = j.getString("paymentUrl");
+                        PaytmGateway();
                                 /*AlertDialog.Builder alert = new AlertDialog.Builder(context);
                                 alert.setTitle("Notice");
                                 alert.setPositiveButton("OK", null);
                                 alert.setMessage(j.getString("status"));
                                 alert.show();*/
 
-                            } else {
-                                AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
-                                alert.setTitle("Notice");
-                                alert.setMessage(j.getString("status"));
-                                alert.setPositiveButton("OK", null);
-                                alert.show();
+                    } else {
+                        AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
+                        alert.setTitle("Notice");
+                        alert.setMessage(j.getString("status"));
+                        alert.setPositiveButton("OK", null);
+                        alert.show();
 
-                            }
-                        } catch (JSONException e) {
-                            //    Toast.makeText(Login_activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
+                    }
+                } catch (JSONException e) {
+                    //    Toast.makeText(Login_activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
 
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        // Hiding the progress dialog after all task complete.
-                        progressDialog.dismiss();
-                        NetworkDialog();
-                    }
-                }) {
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                // Hiding the progress dialog after all task complete.
+                progressDialog.dismiss();
+                NetworkDialog();
+            }
+        }) {
 
 
             @Override
@@ -347,7 +366,7 @@ public class cartList extends AppCompatActivity {
         dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogs.setContentView(R.layout.networkdialog);
         dialogs.setCanceledOnTouchOutside(false);
-        Button done = (Button) dialogs.findViewById(R.id.done);
+        Button done = dialogs.findViewById(R.id.done);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -370,54 +389,52 @@ public class cartList extends AppCompatActivity {
         // Creating Volley newRequestQueue .
         requestQueue = Volley.newRequestQueue(cartList.this);
         // Creating string request with post method.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.CLEAR_CART,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String ServerResponse) {
-                        // Hiding the progress dialog after all task complete.
-                        progressDialog.dismiss();
-                        // Matching server responce message to our text.
-                        JSONObject j = null;
-                        try {
-                            j = new JSONObject(ServerResponse);
-                            String result = j.getString("result");
-                            //Cart_count = j.getString("cartCount");
-                            //cartCount.cartCount(j.getString("cartCount"));
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.CLEAR_CART, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String ServerResponse) {
+                // Hiding the progress dialog after all task complete.
+                progressDialog.dismiss();
+                // Matching server responce message to our text.
+                JSONObject j = null;
+                try {
+                    j = new JSONObject(ServerResponse);
+                    String result = j.getString("result");
+                    //Cart_count = j.getString("cartCount");
+                    //cartCount.cartCount(j.getString("cartCount"));
 
-                            if (result.equals("Success")) {
-                                // If response matched then show the toast.
-                                // Finish the current Login activity
-                                dm.clear();
-                                AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
+                    if (result.equals("Success")) {
+                        // If response matched then show the toast.
+                        // Finish the current Login activity
+                        dm.clear();
+                                /*AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
                                 alert.setTitle("Notice");
                                 alert.setPositiveButton("OK", null);
                                 alert.setMessage(j.getString("status"));
-                                alert.show();
-                                getCartList();
+                                alert.show();*/
+                        getCartList();
 
-                            } else {
-                                AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
-                                alert.setTitle("Notice");
-                                alert.setMessage(j.getString("status"));
-                                alert.setPositiveButton("OK", null);
-                                alert.show();
+                    } else {
+                        AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
+                        alert.setTitle("Notice");
+                        alert.setMessage(j.getString("status"));
+                        alert.setPositiveButton("OK", null);
+                        alert.show();
 
-                            }
-                        } catch (JSONException e) {
-                            //    Toast.makeText(Login_activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-
-                        }
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        // Hiding the progress dialog after all task complete.
-                        progressDialog.dismiss();
-                        NetworkDialog5();
-                    }
-                }) {
+                } catch (JSONException e) {
+                    //    Toast.makeText(Login_activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                // Hiding the progress dialog after all task complete.
+                progressDialog.dismiss();
+                NetworkDialog5();
+            }
+        }) {
 
 
             @Override
@@ -449,7 +466,7 @@ public class cartList extends AppCompatActivity {
         dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogs.setContentView(R.layout.networkdialog);
         dialogs.setCanceledOnTouchOutside(false);
-        Button done = (Button) dialogs.findViewById(R.id.done);
+        Button done = dialogs.findViewById(R.id.done);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -471,73 +488,71 @@ public class cartList extends AppCompatActivity {
         // Creating Volley newRequestQueue .
         requestQueue = Volley.newRequestQueue(cartList.this);
         // Creating string request with post method.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.CHECK_COUPON,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String ServerResponse) {
-                        // Hiding the progress dialog after all task complete.
-                        progressDialog.dismiss();
-                        // Matching server responce message to our text.
-                        JSONObject j = null;
-                        try {
-                            j = new JSONObject(ServerResponse);
-                            String result = j.getString("result");
-                            //Cart_count = j.getString("cartCount");
-                            //cartCount.cartCount(j.getString("cartCount"));
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.CHECK_COUPON, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String ServerResponse) {
+                // Hiding the progress dialog after all task complete.
+                progressDialog.dismiss();
+                // Matching server responce message to our text.
+                JSONObject j = null;
+                try {
+                    j = new JSONObject(ServerResponse);
+                    String result = j.getString("result");
+                    //Cart_count = j.getString("cartCount");
+                    //cartCount.cartCount(j.getString("cartCount"));
 
-                            if (result.equals("Success")) {
-                                // If response matched then show the toast.
-                                // Finish the current Login activity
-                                rounded = j.getString("rounded");
-                                subTotal = j.getString("subTotal");
-                                gst = j.getString("gst");
-                                discount = j.getString("discount");
-                                grandPaidPrice = j.getString("grandTotalPrice");
-                                grandTotal = j.getString("grandTotal");
-                                total = j.getString("total");
-                                activityCartListBinding.rounded.setText(j.getString("rounded"));
-                                activityCartListBinding.subTotal.setText(j.getString("subTotal"));
-                                activityCartListBinding.total.setText(j.getString("total"));
-                                total = j.getString("total");
-                                activityCartListBinding.grandTotal.setText(j.getString("grandTotal"));
-                                grandPaidPrice = j.getString("grandTotalPrice");
-                                activityCartListBinding.grandTotalPrice.setText(j.getString("grandTotalPrice"));
-                                activityCartListBinding.totalItems.setText(j.getString("totalItems"));
-                                activityCartListBinding.totalQtys.setText(j.getString("totalQtys"));
-                                activityCartListBinding.discount.setText(j.getString("discount"));
-                                activityCartListBinding.gst.setText(j.getString("gst"));
-                                activityCartListBinding.cgst.setText(j.getString("cgst"));
-                                activityCartListBinding.sgst.setText(j.getString("sgst"));
-                                //PaytmGateway();
+                    if (result.equals("Success")) {
+                        // If response matched then show the toast.
+                        // Finish the current Login activity
+                        rounded = j.getString("rounded");
+                        subTotal = j.getString("subTotal");
+                        gst = j.getString("gst");
+                        discount = j.getString("discount");
+                        grandPaidPrice = j.getString("grandTotalPrice");
+                        grandTotal = j.getString("grandTotal");
+                        total = j.getString("total");
+                        activityCartListBinding.rounded.setText(j.getString("rounded"));
+                        activityCartListBinding.subTotal.setText(j.getString("subTotal"));
+                        activityCartListBinding.total.setText(j.getString("total"));
+                        total = j.getString("total");
+                        activityCartListBinding.grandTotal.setText(j.getString("grandTotal"));
+                        grandPaidPrice = j.getString("grandTotalPrice");
+                        activityCartListBinding.grandTotalPrice.setText(j.getString("grandTotalPrice"));
+                        activityCartListBinding.totalItems.setText(j.getString("totalItems"));
+                        activityCartListBinding.totalQtys.setText(j.getString("totalQtys"));
+                        activityCartListBinding.discount.setText(j.getString("discount"));
+                        activityCartListBinding.gst.setText(j.getString("gst"));
+                        activityCartListBinding.cgst.setText(j.getString("cgst"));
+                        activityCartListBinding.sgst.setText(j.getString("sgst"));
+                        //PaytmGateway();
                                 /*AlertDialog.Builder alert = new AlertDialog.Builder(context);
                                 alert.setTitle("Notice");
                                 alert.setPositiveButton("OK", null);
                                 alert.setMessage(j.getString("status"));
                                 alert.show();*/
 
-                            } else {
-                                AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
-                                alert.setTitle("Notice");
-                                alert.setMessage(j.getString("status"));
-                                alert.setPositiveButton("OK", null);
-                                alert.show();
+                    } else {
+                        AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
+                        alert.setTitle("Notice");
+                        alert.setMessage(j.getString("status"));
+                        alert.setPositiveButton("OK", null);
+                        alert.show();
 
-                            }
-                        } catch (JSONException e) {
-                            //    Toast.makeText(Login_activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
+                    }
+                } catch (JSONException e) {
+                    //    Toast.makeText(Login_activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
 
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        // Hiding the progress dialog after all task complete.
-                        progressDialog.dismiss();
-                        NetworkDialog3();
-                    }
-                }) {
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                // Hiding the progress dialog after all task complete.
+                progressDialog.dismiss();
+                NetworkDialog3();
+            }
+        }) {
 
 
             @Override
@@ -570,7 +585,7 @@ public class cartList extends AppCompatActivity {
         dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogs.setContentView(R.layout.networkdialog);
         dialogs.setCanceledOnTouchOutside(false);
-        Button done = (Button) dialogs.findViewById(R.id.done);
+        Button done = dialogs.findViewById(R.id.done);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -592,23 +607,22 @@ public class cartList extends AppCompatActivity {
         // Creating Volley newRequestQueue .
         requestQueue = Volley.newRequestQueue(cartList.this);
         // Creating string request with post method.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.CHECK_TRANSACTION,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String ServerResponse) {
-                        // Hiding the progress dialog after all task complete.
-                        progressDialog.dismiss();
-                        // Matching server responce message to our text.
-                        JSONObject j = null;
-                        try {
-                            j = new JSONObject(ServerResponse);
-                            String result = j.getString("result");
-                            //Cart_count = j.getString("cartCount");
-                            //cartCount.cartCount(j.getString("cartCount"));
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.CHECK_TRANSACTION, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String ServerResponse) {
+                // Hiding the progress dialog after all task complete.
+                progressDialog.dismiss();
+                // Matching server responce message to our text.
+                JSONObject j = null;
+                try {
+                    j = new JSONObject(ServerResponse);
+                    String result = j.getString("result");
+                    //Cart_count = j.getString("cartCount");
+                    //cartCount.cartCount(j.getString("cartCount"));
 
-                            if (result.equals("Success")) {
-                                // If response matched then show the toast.
-                                // Finish the current Login activity
+                    if (result.equals("Success")) {
+                        // If response matched then show the toast.
+                        // Finish the current Login activity
                                 /*orderId = j.getString("orderId");
                                 mid = j.getString("mid");
                                 txnToken = j.getString("txnToken");
@@ -618,35 +632,34 @@ public class cartList extends AppCompatActivity {
                                 alert.setPositiveButton("OK", null);
                                 alert.setMessage(j.getString("status"));
                                 alert.show();*/
-                                transactionId = j.getString("txnId");
-                                orderPlaced();
+                        transactionId = j.getString("txnId");
+                        orderPlaced();
                                 /*Intent intent = new Intent(cartList.this, PaymentSuccessScreen.class);
                                 startActivity(intent);*/
 
 
-                            } else {
-                                AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
-                                alert.setTitle("Notice");
-                                alert.setMessage(j.getString("status"));
-                                alert.setPositiveButton("OK", null);
-                                alert.show();
+                    } else {
+                        AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
+                        alert.setTitle("Notice");
+                        alert.setMessage(j.getString("status"));
+                        alert.setPositiveButton("OK", null);
+                        alert.show();
 
-                            }
-                        } catch (JSONException e) {
-                            //    Toast.makeText(Login_activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
+                    }
+                } catch (JSONException e) {
+                    //    Toast.makeText(Login_activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
 
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        // Hiding the progress dialog after all task complete.
-                        progressDialog.dismiss();
-                        NetworkDialog2();
-                    }
-                }) {
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                // Hiding the progress dialog after all task complete.
+                progressDialog.dismiss();
+                NetworkDialog2();
+            }
+        }) {
 
 
             @Override
@@ -677,7 +690,7 @@ public class cartList extends AppCompatActivity {
         dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogs.setContentView(R.layout.networkdialog);
         dialogs.setCanceledOnTouchOutside(false);
-        Button done = (Button) dialogs.findViewById(R.id.done);
+        Button done = dialogs.findViewById(R.id.done);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -699,23 +712,22 @@ public class cartList extends AppCompatActivity {
         // Creating Volley newRequestQueue .
         requestQueue = Volley.newRequestQueue(cartList.this);
         // Creating string request with post method.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.PLACE_ORDER,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String ServerResponse) {
-                        // Hiding the progress dialog after all task complete.
-                        progressDialog.dismiss();
-                        // Matching server responce message to our text.
-                        JSONObject j = null;
-                        try {
-                            j = new JSONObject(ServerResponse);
-                            String result = j.getString("result");
-                            //Cart_count = j.getString("cartCount");
-                            //cartCount.cartCount(j.getString("cartCount"));
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.PLACE_ORDER, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String ServerResponse) {
+                // Hiding the progress dialog after all task complete.
+                progressDialog.dismiss();
+                // Matching server responce message to our text.
+                JSONObject j = null;
+                try {
+                    j = new JSONObject(ServerResponse);
+                    String result = j.getString("result");
+                    //Cart_count = j.getString("cartCount");
+                    //cartCount.cartCount(j.getString("cartCount"));
 
-                            if (result.equals("Success")) {
-                                // If response matched then show the toast.
-                                // Finish the current Login activity
+                    if (result.equals("Success")) {
+                        // If response matched then show the toast.
+                        // Finish the current Login activity
                                 /*orderId = j.getString("orderId");
                                 mid = j.getString("mid");
                                 txnToken = j.getString("txnToken");
@@ -725,38 +737,38 @@ public class cartList extends AppCompatActivity {
                                 alert.setPositiveButton("OK", null);
                                 alert.setMessage(j.getString("status"));
                                 alert.show();*/
-                                Intent intent = new Intent(cartList.this, PaymentSuccessScreen.class);
-                                intent.putExtra("currentDate", j.getString("currentDate"));
-                                intent.putExtra("currentTime", j.getString("currentTime"));
-                                intent.putExtra("transactionId", transactionId);
-                                intent.putExtra("grandPaidPrice", grandPaidPrice);
-                                intent.putExtra("paymentMode", "Online");
-                                startActivity(intent);
+                        clickedCount = 0;
+                        Intent intent = new Intent(cartList.this, PaymentSuccessScreen.class);
+                        intent.putExtra("currentDate", j.getString("currentDate"));
+                        intent.putExtra("currentTime", j.getString("currentTime"));
+                        intent.putExtra("transactionId", transactionId);
+                        intent.putExtra("grandPaidPrice", grandPaidPrice);
+                        intent.putExtra("paymentMode", "Online");
+                        startActivity(intent);
 
 
-                            } else {
-                                AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
-                                alert.setTitle("Notice");
-                                alert.setMessage(j.getString("status"));
-                                alert.setPositiveButton("OK", null);
-                                alert.show();
+                    } else {
+                        AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
+                        alert.setTitle("Notice");
+                        alert.setMessage(j.getString("status"));
+                        alert.setPositiveButton("OK", null);
+                        alert.show();
 
-                            }
-                        } catch (JSONException e) {
-                            //    Toast.makeText(Login_activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-
-                        }
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        // Hiding the progress dialog after all task complete.
-                        progressDialog.dismiss();
-                        NetworkDialog4();
-                    }
-                }) {
+                } catch (JSONException e) {
+                    //    Toast.makeText(Login_activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                // Hiding the progress dialog after all task complete.
+                progressDialog.dismiss();
+                NetworkDialog4();
+            }
+        }) {
 
 
             @Override
@@ -802,7 +814,7 @@ public class cartList extends AppCompatActivity {
         dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogs.setContentView(R.layout.networkdialog);
         dialogs.setCanceledOnTouchOutside(false);
-        Button done = (Button) dialogs.findViewById(R.id.done);
+        Button done = dialogs.findViewById(R.id.done);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

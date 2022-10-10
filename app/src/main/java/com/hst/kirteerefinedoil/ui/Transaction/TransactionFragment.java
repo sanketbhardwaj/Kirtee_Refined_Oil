@@ -52,12 +52,12 @@ public class TransactionFragment extends Fragment {
 
         binding = FragmentTransactionBinding.inflate(inflater, container, false);
 
-        binding.arrowback3.setOnClickListener(new View.OnClickListener() {
+        /*binding.arrowback3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().onBackPressed();
             }
-        });
+        });*/
         binding.rvFollowUpsList.setHasFixedSize(false);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         binding.rvFollowUpsList.setLayoutManager(mLayoutManager);
@@ -84,12 +84,8 @@ public class TransactionFragment extends Fragment {
                         JSONObject j = null;
                         try {
                             j = new JSONObject(ServerResponse);
-                            if (ServerResponse.length() == 21) {
-                                binding.noCustomer.setVisibility(View.VISIBLE);
-                                binding.shimmerViewContainer.setVisibility(View.GONE);
 
-                            } else {
-                                binding.noCustomer.setVisibility(View.GONE);
+
                                 JSONArray applist = j.getJSONArray("orderHistory");
 
                                 if (applist != null && applist.length() > 0) {
@@ -130,7 +126,7 @@ public class TransactionFragment extends Fragment {
                                     binding.shimmerViewContainer.setVisibility(View.GONE);
 
                                 }
-                            }
+
 
                             // Finish the current Login activity.
                             // Opening the user profile activity using intent.
@@ -186,7 +182,7 @@ public class TransactionFragment extends Fragment {
         dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogs.setContentView(R.layout.networkdialog);
         dialogs.setCanceledOnTouchOutside(false);
-        Button done = (Button) dialogs.findViewById(R.id.done);
+        Button done = dialogs.findViewById(R.id.done);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,433 +8,574 @@
     tools:context=".cartList">
 
     <LinearLayout
+        android:id="@+id/no_cartList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5sp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="5sp"
-        android:background="@color/white"
-        android:elevation="10dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="No items in cart."
+            android:textColor="#2b9fd1"
+            android:textSize="20dp" />
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="14dp"
+            android:defaultFocusHighlightEnabled="false"
+            android:focusable="true"
+            android:forceDarkAllowed="true"
+            android:visibility="visible"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/style"
+            app:lottie_scale="0.1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/tool"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="50sp"
+            android:background="@drawable/bg_ui_header"
+            android:gravity="center"
+            android:padding="10sp">
+
+
+            <LinearLayout
+                android:id="@+id/ss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/backBtn"
+                    android:layout_width="20sp"
+                    android:layout_height="20sp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_back"
+                    app:tint="@color/white" />
+
+
+                <TextView
+                    android:id="@+id/shopname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15sp"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:text="Cart"
+                    android:textColor="#fff"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+
+                <ImageView
+                    android:id="@+id/cart_image"
+                    android:layout_width="40sp"
+                    android:layout_height="30sp"
+                    android:layout_gravity="center"
+                    android:layout_toRightOf="@id/shopname"
+                    android:src="@drawable/cart"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/totalItems"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="8sp"
+                    android:gravity="center"
+                    android:textColor="#fff"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15sp"
             android:layout_marginTop="10sp"
-            android:orientation="horizontal">
+            android:layout_marginRight="15sp"
+            android:orientation="vertical"
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
-                android:text="Rounded :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
+            app:shimmer_duration="800">
 
-            <TextView
-                android:id="@+id/rounded"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": Canara"
-                android:textColor="@color/invoice_color"
-                android:textSize="14dp"
-                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <include layout="@layout/shimmerprofile" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
+                <include layout="@layout/shimmerprofile" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
-                android:text="Total :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
+                <include layout="@layout/shimmerprofile" />
 
-            <TextView
-                android:id="@+id/total"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": INDB0026"
-                android:textColor="@color/invoice_color"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                <include layout="@layout/shimmerprofile" />
+
+                <include layout="@layout/shimmerprofile" />
+
+                <include layout="@layout/shimmerprofile" />
+
+                <include layout="@layout/shimmerprofile" />
+
+                <include layout="@layout/shimmerprofile" />
+
+                <include layout="@layout/shimmerprofile" />
+
+                <include layout="@layout/shimmerprofile" />
+
+                <include layout="@layout/shimmerprofile" />
+
+                <include layout="@layout/shimmerprofile" />
+
+                <include layout="@layout/shimmerprofile" />
+
+                <include layout="@layout/shimmerprofile" />
+
+                <include layout="@layout/shimmerprofile" />
+
+                <include layout="@layout/shimmerprofile" />
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <LinearLayout
+            android:id="@+id/screenData"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
-                android:text="Sub Total :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/subTotal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": INDB0026"
-                android:textColor="@color/invoice_color"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
-                android:text="Grand Total :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/grandTotal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": sakri"
-                android:textColor="@color/invoice_color"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
-                android:text="Final Payment :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/grandTotalPrice"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": sakri"
-                android:textColor="@color/invoice_color"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
-                android:text="Total Items :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/totalItems"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": sakri"
-                android:textColor="@color/invoice_color"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
-                android:text="Total Qtys :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/totalQtys"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": sakri"
-                android:textColor="@color/invoice_color"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
-                android:text="Gst :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/gst"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": sakri"
-                android:textColor="@color/invoice_color"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
-                android:text="Cgst :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/cgst"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": sakri"
-                android:textColor="@color/invoice_color"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
-                android:text="Sgst :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/sgst"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": sakri"
-                android:textColor="@color/invoice_color"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
-                android:text="Discount :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/discount"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": sakri"
-                android:textColor="@color/invoice_color"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
-            android:visibility="visible">
-
-
-            <TextView
-                android:id="@+id/pay"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/text1"
-                android:gravity="center"
-                android:text="Pay"
-                android:textColor="#FFFF"
-                android:textSize="12dp" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
-                android:text="Coupon :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/coupon"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:hint="Enter Coupon"
-                android:textColor="@color/black"
-                android:textSize="14dp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
-            android:visibility="visible">
-
-
-            <TextView
-                android:id="@+id/applyCoupon"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/text1"
-                android:gravity="center"
-                android:text="Pay"
-                android:textColor="#FFFF"
-                android:textSize="12dp" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
-            android:visibility="visible">
-
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/clearAll"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:background="@color/red_800"
+                android:clickable="true"
                 android:gravity="center"
-                android:text="Clear All"
+                android:padding="5dp"
+                android:text="Clear Cart"
                 android:textColor="#FFFF"
-                android:textSize="12dp" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:text="Address :"
-                android:textColor="@color/invoice_number_color"
                 android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/address"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": sakri"
-                android:textColor="@color/invoice_color"
-                android:textSize="14dp"
-                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/seeMore"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCartList"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/text1"
-                android:gravity="center"
-                android:text="See More"
-                android:textColor="#FFFF"
-                android:textSize="12dp" />
+                android:layout_height="wrap_content"
+                android:clipToPadding="true" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1.8"
+                            android:text="Coupon :"
+                            android:textColor="@color/invoice_number_color"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/coupon"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:hint="Enter Coupon"
+                            android:textColor="@color/black"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+
+                        <TextView
+                            android:id="@+id/applyCoupon"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/text1"
+                            android:gravity="center"
+                            android:text="Pay"
+                            android:textColor="#FFFF"
+                            android:textSize="12dp" />
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:text="Address :"
+                            android:textColor="@color/invoice_number_color"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/address"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text=": sakri"
+                            android:textColor="@color/invoice_color"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/seeMore"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/text1"
+                            android:gravity="center"
+                            android:text="See More"
+                            android:textColor="#FFFF"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1.8"
+                            android:text="Total :"
+                            android:textColor="@color/invoice_number_color"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/total"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:textColor="@color/invoice_color"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/discountLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1.8"
+                            android:text="Discount :"
+                            android:textColor="@color/invoice_number_color"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/discount"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:textColor="@color/invoice_color"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1.8"
+                            android:text="GST (5%):"
+                            android:textColor="@color/invoice_number_color"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/gst"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:textColor="@color/invoice_color"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1.8"
+                            android:text="Sub Total :"
+                            android:textColor="@color/invoice_number_color"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/subTotal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:textColor="@color/invoice_color"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/grandTotalLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1.8"
+                            android:text="Grand Total :"
+                            android:textColor="@color/invoice_number_color"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/grandTotal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:textColor="@color/invoice_color"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/roundedLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1.8"
+                            android:text="Rounded :"
+                            android:textColor="@color/invoice_number_color"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/rounded"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:textColor="@color/invoice_color"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1.8"
+                            android:text="Payable Amount :"
+                            android:textColor="@color/invoice_number_color"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/grandTotalPrice"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:textColor="@color/invoice_color"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1.8"
+                            android:text="Total Qtys :"
+                            android:textColor="@color/invoice_number_color"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/totalQtys"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text=": sakri"
+                            android:textColor="@color/invoice_color"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1.8"
+                            android:text="Cgst :"
+                            android:textColor="@color/invoice_number_color"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/cgst"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text=": sakri"
+                            android:textColor="@color/invoice_color"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1.8"
+                            android:text="Sgst :"
+                            android:textColor="@color/invoice_number_color"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/sgst"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text=": sakri"
+                            android:textColor="@color/invoice_color"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+
+                        <TextView
+                            android:id="@+id/pay"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/text1"
+                            android:gravity="center"
+                            android:text="Pay"
+                            android:textColor="#FFFF"
+                            android:textSize="12dp" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
 
         </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCartList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="true" />
 
     </LinearLayout>
 

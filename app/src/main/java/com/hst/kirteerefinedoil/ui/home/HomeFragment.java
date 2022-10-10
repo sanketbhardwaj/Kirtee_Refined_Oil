@@ -66,6 +66,12 @@ public class HomeFragment extends Fragment implements CartCount {
                 startActivity(new Intent(getContext(), cartList.class));
             }
         });
+        binding.cartImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), cartList.class));
+            }
+        });
         productList();
         return binding.getRoot();
     }
@@ -235,7 +241,7 @@ public class HomeFragment extends Fragment implements CartCount {
                                         }
                                     });
                                     binding.categoryDetailRv.setAdapter(adapter);
-
+                                    binding.shimmerViewContainer.setVisibility(View.GONE);
                                 }
                             }
 
@@ -282,7 +288,7 @@ public class HomeFragment extends Fragment implements CartCount {
         dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogs.setContentView(R.layout.networkdialog);
         dialogs.setCanceledOnTouchOutside(false);
-        Button done = (Button) dialogs.findViewById(R.id.done);
+        Button done = dialogs.findViewById(R.id.done);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
