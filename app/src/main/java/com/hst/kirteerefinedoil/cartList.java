@@ -41,6 +41,7 @@ public class cartList extends AppCompatActivity {
     ActivityCartListBinding activityCartListBinding;
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
+    String paymentMethod;
     String grandPaidPrice, orderId, mid, txnToken, callBackUrl, paymentUrl, total, subTotal, discount, transactionId, gst, grandTotal, rounded;
     ArrayList<modelCart> dm = new ArrayList<modelCart>();
 
@@ -73,6 +74,7 @@ public class cartList extends AppCompatActivity {
                 alert.show();
             }
         });
+
         activityCartListBinding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,14 +85,29 @@ public class cartList extends AppCompatActivity {
         activityCartListBinding.pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickedCount++;
-                StartPayment();
+                if (activityCartListBinding.cod.isChecked()) {
+                    paymentMethod = "COD";
+                    orderPlaced();
+                } else if (activityCartListBinding.online.isChecked()) {
+                    paymentMethod = "Online";
+                    clickedCount++;
+                    StartPayment();
+                } else {
+                    Toast.makeText(cartList.this, "Select payment method", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
         activityCartListBinding.applyCoupon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                applyCoupon();
+                if (!activityCartListBinding.coupon.getText().toString().isEmpty()) {
+                    applyCoupon();
+                } else {
+                    Toast.makeText(cartList.this, "Enter coupon code", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         activityCartListBinding.clearAll.setOnClickListener(new View.OnClickListener() {
@@ -155,7 +172,11 @@ public class cartList extends AppCompatActivity {
                             activityCartListBinding.roundedLayout.setVisibility(View.GONE);
                             activityCartListBinding.grandTotalLayout.setVisibility(View.GONE);
                         }
-
+                        if (!j.getString("discount").equals("0")) {
+                            activityCartListBinding.discount.setText("₹ " + j.getString("discount") + "/-");
+                        } else {
+                            activityCartListBinding.discountLayout.setVisibility(View.GONE);
+                        }
 
                         activityCartListBinding.subTotal.setText(j.getString("subTotal"));
 
@@ -166,11 +187,7 @@ public class cartList extends AppCompatActivity {
 
                         activityCartListBinding.totalItems.setText(j.getString("totalItems"));
                         activityCartListBinding.totalQtys.setText(j.getString("totalQtys"));
-                        if (!j.getString("discount").equals("0")) {
-                            activityCartListBinding.discount.setText("₹ " + j.getString("discount") + "/-");
-                        } else {
-                            activityCartListBinding.discountLayout.setVisibility(View.GONE);
-                        }
+
 
                         activityCartListBinding.pay.setText("PAY ₹ " + j.getString("grandTotalPrice") + "/-");
                         activityCartListBinding.gst.setText("₹ " + j.getString("gst") + "/-");
@@ -510,20 +527,60 @@ public class cartList extends AppCompatActivity {
                         discount = j.getString("discount");
                         grandPaidPrice = j.getString("grandTotalPrice");
                         grandTotal = j.getString("grandTotal");
+                        grandPaidPrice = j.getString("grandTotalPrice");
                         total = j.getString("total");
-                        activityCartListBinding.rounded.setText(j.getString("rounded"));
+
+
+                        if (!j.getString("rounded").equals("0")) {
+                            activityCartListBinding.rounded.setText("₹ " + j.getString("rounded") + "/-");
+                            activityCartListBinding.grandTotal.setText("₹ " + j.getString("grandTotal") + "/-");
+                            activityCartListBinding.roundedLayout.setVisibility(View.VISIBLE);
+                            activityCartListBinding.grandTotalLayout.setVisibility(View.VISIBLE);
+                        } else {
+                            activityCartListBinding.roundedLayout.setVisibility(View.GONE);
+                            activityCartListBinding.grandTotalLayout.setVisibility(View.GONE);
+                        }
+                        if (!j.getString("discount").equals("0")) {
+                            activityCartListBinding.discount.setText("₹ " + j.getString("discount") + "/-");
+                            activityCartListBinding.discountLayout.setVisibility(View.VISIBLE);
+                        } else {
+                            activityCartListBinding.discountLayout.setVisibility(View.GONE);
+                        }
+
+                        activityCartListBinding.subTotal.setText(j.getString("subTotal"));
+
+                        activityCartListBinding.total.setText("₹ " + j.getString("total") + "/-");
+
+
+                        activityCartListBinding.grandTotalPrice.setText("₹ " + j.getString("grandTotalPrice") + "/-");
+
+                        /*activityCartListBinding.totalItems.setText(j.getString("totalItems"));
+                        activityCartListBinding.totalQtys.setText(j.getString("totalQtys"));
+*/
+
+                        activityCartListBinding.pay.setText("PAY ₹ " + j.getString("grandTotalPrice") + "/-");
+                        activityCartListBinding.gst.setText("₹ " + j.getString("gst") + "/-");
+
+                        activityCartListBinding.cgst.setText(j.getString("cgst"));
+                        activityCartListBinding.sgst.setText(j.getString("sgst"));
+
+
+
+
+
+                        /*activityCartListBinding.rounded.setText(j.getString("rounded"));
                         activityCartListBinding.subTotal.setText(j.getString("subTotal"));
                         activityCartListBinding.total.setText(j.getString("total"));
-                        total = j.getString("total");
+
                         activityCartListBinding.grandTotal.setText(j.getString("grandTotal"));
-                        grandPaidPrice = j.getString("grandTotalPrice");
+
                         activityCartListBinding.grandTotalPrice.setText(j.getString("grandTotalPrice"));
                         activityCartListBinding.totalItems.setText(j.getString("totalItems"));
                         activityCartListBinding.totalQtys.setText(j.getString("totalQtys"));
                         activityCartListBinding.discount.setText(j.getString("discount"));
                         activityCartListBinding.gst.setText(j.getString("gst"));
                         activityCartListBinding.cgst.setText(j.getString("cgst"));
-                        activityCartListBinding.sgst.setText(j.getString("sgst"));
+                        activityCartListBinding.sgst.setText(j.getString("sgst"));*/
                         //PaytmGateway();
                                 /*AlertDialog.Builder alert = new AlertDialog.Builder(context);
                                 alert.setTitle("Notice");
@@ -743,7 +800,7 @@ public class cartList extends AppCompatActivity {
                         intent.putExtra("currentTime", j.getString("currentTime"));
                         intent.putExtra("transactionId", transactionId);
                         intent.putExtra("grandPaidPrice", grandPaidPrice);
-                        intent.putExtra("paymentMode", "Online");
+                        intent.putExtra("paymentMode", paymentMethod);
                         startActivity(intent);
 
 
@@ -779,8 +836,12 @@ public class cartList extends AppCompatActivity {
 
                 // Adding All values to Params.
                 // The firs argument should be same sa your MySQL database table columns.
+                if (paymentMethod.equals("Online")) {
+                    params.put("transactionId", transactionId);
+                    params.put("orderId", orderId);
+                }
                 params.put("userUid", SplashScreen.Uid);
-                params.put("paymentType", "Online");
+                params.put("paymentType", paymentMethod);
                 params.put("coupon", activityCartListBinding.coupon.getText().toString());
                 params.put("subTotal", subTotal);
                 params.put("total", total);
@@ -789,12 +850,12 @@ public class cartList extends AppCompatActivity {
                 params.put("city", SplashScreen.city);
                 params.put("state", SplashScreen.state);
                 params.put("pincode", SplashScreen.pinCode);
-                params.put("transactionId", transactionId);
+
                 params.put("gst", gst);
                 params.put("grandTotal", grandTotal);
                 params.put("rounded", rounded);
                 params.put("grandPricePaid", grandPaidPrice);
-                params.put("orderId", orderId);
+
 
                 return params;
             }

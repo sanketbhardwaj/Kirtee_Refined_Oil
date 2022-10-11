@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +32,7 @@ public class Change_Address extends AppCompatActivity {
     ActivityChangeAddressBinding activityChangeAddressBinding;
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
+    String[] states = {"Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttarakhand", "Uttar Pradesh", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Lakshadweep", "Puducherry"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +40,21 @@ public class Change_Address extends AppCompatActivity {
         activityChangeAddressBinding = ActivityChangeAddressBinding.inflate(getLayoutInflater());
         View view = activityChangeAddressBinding.getRoot();
         setContentView(view);
+
+        ArrayAdapter aa = new ArrayAdapter(this, R.layout.spinner_layout_selected, states);
+        aa.setDropDownViewResource(R.layout.spinner_layout);
+        //Setting the ArrayAdapter data on the Spinner
+        activityChangeAddressBinding.states.setAdapter(aa);
+
+
+        activityChangeAddressBinding.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         activityChangeAddressBinding.address.setText(SplashScreen.address);
-        activityChangeAddressBinding.state.setText(SplashScreen.state);
+        activityChangeAddressBinding.states.setSelection(aa.getPosition(SplashScreen.state));
         activityChangeAddressBinding.pincode.setText(SplashScreen.pinCode);
         activityChangeAddressBinding.city.setText(SplashScreen.city);
         activityChangeAddressBinding.updateAddress.setOnClickListener(new View.OnClickListener() {
@@ -60,62 +75,60 @@ public class Change_Address extends AppCompatActivity {
         // Creating Volley newRequestQueue .
         requestQueue = Volley.newRequestQueue(Change_Address.this);
         // Creating string request with post method.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.UPDATE_ADDRESS,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String ServerResponse) {
-                        // Hiding the progress dialog after all task complete.
-                        progressDialog.dismiss();
-                        // Matching server responce message to our text.
-                        JSONObject j = null;
-                        try {
-                            j = new JSONObject(ServerResponse);
-                            String result = j.getString("result");
-                            //Cart_count = j.getString("cartCount");
-                            //cartCount.cartCount(j.getString("cartCount"));
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.UPDATE_ADDRESS, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String ServerResponse) {
+                // Hiding the progress dialog after all task complete.
+                progressDialog.dismiss();
+                // Matching server responce message to our text.
+                JSONObject j = null;
+                try {
+                    j = new JSONObject(ServerResponse);
+                    String result = j.getString("result");
+                    //Cart_count = j.getString("cartCount");
+                    //cartCount.cartCount(j.getString("cartCount"));
 
-                            if (result.equals("Success")) {
-                                // If response matched then show the toast.
-                                // Finish the current Login activity
-                                SplashScreen.address = activityChangeAddressBinding.address.getText().toString();
-                                SplashScreen.city = activityChangeAddressBinding.city.getText().toString();
-                                SplashScreen.pinCode = activityChangeAddressBinding.pincode.getText().toString();
-                                SplashScreen.state = activityChangeAddressBinding.state.getText().toString();
-                                AlertDialog.Builder alert = new AlertDialog.Builder(Change_Address.this);
-                                alert.setTitle("Notice");
-                                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        finish();
-                                        startActivity(new Intent(Change_Address.this, cartList.class));
-                                    }
-                                });
-                                alert.setMessage(j.getString("status"));
-                                alert.show();
-
-                            } else {
-                                AlertDialog.Builder alert = new AlertDialog.Builder(Change_Address.this);
-                                alert.setTitle("Notice");
-                                alert.setMessage(j.getString("status"));
-                                alert.setPositiveButton("OK", null);
-                                alert.show();
-
+                    if (result.equals("Success")) {
+                        // If response matched then show the toast.
+                        // Finish the current Login activity
+                        SplashScreen.address = activityChangeAddressBinding.address.getText().toString();
+                        SplashScreen.city = activityChangeAddressBinding.city.getText().toString();
+                        SplashScreen.pinCode = activityChangeAddressBinding.pincode.getText().toString();
+                        SplashScreen.state = activityChangeAddressBinding.states.getSelectedItem().toString();
+                        AlertDialog.Builder alert = new AlertDialog.Builder(Change_Address.this);
+                        alert.setTitle("Notice");
+                        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                finish();
+                                startActivity(new Intent(Change_Address.this, cartList.class));
                             }
-                        } catch (JSONException e) {
-                            //    Toast.makeText(Login_activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
+                        });
+                        alert.setMessage(j.getString("status"));
+                        alert.show();
 
-                        }
+                    } else {
+                        AlertDialog.Builder alert = new AlertDialog.Builder(Change_Address.this);
+                        alert.setTitle("Notice");
+                        alert.setMessage(j.getString("status"));
+                        alert.setPositiveButton("OK", null);
+                        alert.show();
+
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        // Hiding the progress dialog after all task complete.
-                        progressDialog.dismiss();
-                        NetworkDialog();
-                    }
-                }) {
+                } catch (JSONException e) {
+                    //    Toast.makeText(Login_activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                // Hiding the progress dialog after all task complete.
+                progressDialog.dismiss();
+                NetworkDialog();
+            }
+        }) {
 
 
             @Override
@@ -130,7 +143,7 @@ public class Change_Address extends AppCompatActivity {
                 params.put("address", activityChangeAddressBinding.address.getText().toString());
                 params.put("city", activityChangeAddressBinding.city.getText().toString());
                 params.put("pincode", activityChangeAddressBinding.pincode.getText().toString());
-                params.put("state", activityChangeAddressBinding.state.getText().toString());
+                params.put("state", activityChangeAddressBinding.states.getSelectedItem().toString());
 
 
                 return params;

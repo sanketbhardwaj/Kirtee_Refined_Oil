@@ -19,7 +19,10 @@ public class PaymentSuccessScreen extends AppCompatActivity {
         setContentView(view);
         activityPaymentSuccessScreenBinding.dateSuccess.setText(getIntent().getStringExtra("currentDate"));
         activityPaymentSuccessScreenBinding.timeSuccess.setText(getIntent().getStringExtra("currentTime"));
-        activityPaymentSuccessScreenBinding.amountPaid.setText(getIntent().getStringExtra("grandPaidPrice"));
+        activityPaymentSuccessScreenBinding.amountPaid.setText("₹ " + getIntent().getStringExtra("grandPaidPrice") + "/-");
+        if (getIntent().getStringExtra("transactionId").isEmpty()) {
+            activityPaymentSuccessScreenBinding.transactionText.setVisibility(View.GONE);
+        }
         activityPaymentSuccessScreenBinding.transactionId.setText(getIntent().getStringExtra("transactionId"));
         activityPaymentSuccessScreenBinding.paymentMode.setText(getIntent().getStringExtra("paymentMode"));
         activityPaymentSuccessScreenBinding.done.setOnClickListener(new View.OnClickListener() {

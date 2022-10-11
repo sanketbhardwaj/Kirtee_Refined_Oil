@@ -120,7 +120,6 @@
             android:layout_marginTop="10sp"
             android:layout_marginRight="15sp"
             android:orientation="vertical"
-
             app:shimmer_duration="800">
 
             <LinearLayout
@@ -187,16 +186,17 @@
                 android:textSize="14sp" />
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvCartList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="true" />
-
-
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCartList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="250dp"
+                    android:clipToPadding="true" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -206,14 +206,15 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="30dp"
+                        android:layout_marginBottom="5sp"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginStart="10dp"
-                            android:layout_weight="1.8"
+                            android:gravity="center"
                             android:text="Coupon :"
                             android:textColor="@color/invoice_number_color"
                             android:textSize="14sp" />
@@ -222,33 +223,32 @@
                             android:id="@+id/coupon"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/dimen_10dp"
                             android:layout_weight="1"
+                            android:background="@drawable/edit_text_border"
+                            android:digits="0123456789QWERTYUIOPLKJHGFDSAZXCVBNMqwertyuioplkjhgfdsazxcvbnm"
+                            android:focusedByDefault="false"
                             android:hint="Enter Coupon"
+                            android:maxLength="6"
+                            android:paddingStart="@dimen/dimen_10dp"
+                            android:paddingBottom="2dp"
+                            android:textAllCaps="true"
                             android:textColor="@color/black"
+                            android:textColorHint="@color/gray_686868"
                             android:textSize="14dp" />
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="horizontal"
-                        android:visibility="visible">
-
 
                         <TextView
                             android:id="@+id/applyCoupon"
-                            android:layout_width="match_parent"
+                            android:layout_width="50dp"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="10dp"
+                            android:layout_gravity="end"
+                            android:layout_marginStart="@dimen/dimen_10dp"
                             android:layout_marginEnd="10dp"
                             android:background="@drawable/text1"
                             android:gravity="center"
-                            android:text="Pay"
+                            android:text="Apply"
                             android:textColor="#FFFF"
                             android:textSize="12dp" />
-
 
                     </LinearLayout>
 
@@ -256,45 +256,92 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
+                        android:layout_marginBottom="5sp"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="10dp"
-                            android:layout_weight="1"
-                            android:text="Address :"
+                            android:layout_weight="2"
+                            android:text="Delivery Address :"
                             android:textColor="@color/invoice_number_color"
                             android:textSize="14sp" />
 
-                        <TextView
-                            android:id="@+id/address"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text=": sakri"
-                            android:textColor="@color/invoice_color"
-                            android:textSize="14dp"
-                            android:textStyle="bold" />
-
-                        <TextView
+                        <LinearLayout
                             android:id="@+id/seeMore"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
                             android:layout_weight="1"
-                            android:background="@drawable/text1"
-                            android:gravity="center"
-                            android:text="See More"
-                            android:textColor="#FFFF"
-                            android:textSize="12dp" />
+                            android:clickable="true"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/address"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:textColor="@color/invoice_color"
+                                android:textSize="14dp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+
+                                android:layout_width="25sp"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="10dp"
+                                android:gravity="center"
+                                android:src="@drawable/pencil_in_a_square_interface_symbol_of_gross_outline_svgrepo_com"
+                                app:tint="@color/app_color" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
+                        android:layout_marginBottom="5sp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1.8"
+                            android:text="Payment Mode :"
+                            android:textColor="@color/invoice_number_color"
+                            android:textSize="14sp" />
+
+                        <RadioGroup
+                            android:id="@+id/payment_mode"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/online"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="Online"
+                                android:textColor="@color/black" />
+
+                            <RadioButton
+                                android:id="@+id/cod"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="COD"
+                                android:textColor="@color/black" />
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="5sp"
                         android:orientation="horizontal">
 
                         <TextView
@@ -320,6 +367,7 @@
                         android:id="@+id/discountLayout"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
+                        android:layout_marginBottom="5sp"
                         android:orientation="horizontal">
 
                         <TextView
@@ -344,6 +392,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
+                        android:layout_marginBottom="5sp"
                         android:orientation="horizontal">
 
                         <TextView
@@ -351,7 +400,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginStart="10dp"
                             android:layout_weight="1.8"
-                            android:text="GST (5%):"
+                            android:text="GST (5%) :"
                             android:textColor="@color/invoice_number_color"
                             android:textSize="14sp" />
 
@@ -394,6 +443,7 @@
                         android:id="@+id/grandTotalLayout"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
+                        android:layout_marginBottom="5sp"
                         android:orientation="horizontal">
 
                         <TextView
@@ -419,6 +469,7 @@
                         android:id="@+id/roundedLayout"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
+                        android:layout_marginBottom="5sp"
                         android:orientation="horizontal">
 
                         <TextView
@@ -549,7 +600,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="40dp"
                         android:layout_marginBottom="10dp"
                         android:orientation="horizontal"
                         android:visibility="visible">

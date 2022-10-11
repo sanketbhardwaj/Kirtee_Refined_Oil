@@ -1,196 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".Change_Address">
 
+    <RelativeLayout
+        android:id="@+id/tool"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:background="@drawable/bg_ui_header"
+        android:gravity="center"
+        android:padding="10sp">
+
+
+        <LinearLayout
+            android:id="@+id/ss"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/backBtn"
+                android:layout_width="20sp"
+                android:layout_height="20sp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_back"
+                app:tint="@color/white" />
+
+
+            <TextView
+                android:id="@+id/shopname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15sp"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:text="Update delivery address"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/totalItems"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8sp"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tool"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5sp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5sp"
         android:background="@color/white"
-        android:elevation="10dp"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight="3"
-                android:src="@drawable/ic_user__4_" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/client_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hitesh Duseja"
-                    android:textColor="#717277"
-                    android:textSize="15sp"
-
-                    />
-
-                <TextView
-                    android:id="@+id/client_mobile1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="8623882989"
-                    android:textColor="#A4A5AA"
-                    android:textSize="11sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight="3"
-                android:src="@drawable/ic_delete"
-                android:visibility="gone" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight="3"
-                android:src="@drawable/ic_check_mark__3_" />
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginTop="10sp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
-                android:text="Address :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:text="Address"
+                android:textColor="@color/gray_666666"
+                android:textSize="12dp" />
 
             <EditText
                 android:id="@+id/address"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": Canara"
-                android:textColor="@color/invoice_color"
-                android:textSize="14dp"
-                android:textStyle="bold" />
+                android:background="@drawable/edit_text_border"
+                android:lines="4"
+                android:paddingLeft="@dimen/dimen_10dp"
+                android:paddingRight="@dimen/dimen_10dp"
+                android:textColor="@color/black"
+                android:textSize="14dp" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/quatation_amount_txt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
                 android:text="City :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
+                android:textColor="@color/gray_666666"
+
+                android:textSize="12dp" />
 
             <EditText
                 android:id="@+id/city"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": INDB0026"
-                android:textColor="@color/invoice_color"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:layout_height="30sp"
+                android:background="@drawable/edit_text_border"
+                android:paddingLeft="@dimen/dimen_10dp"
+                android:paddingRight="@dimen/dimen_10dp"
+                android:textColor="@color/black"
+                android:textSize="14dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.8"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
                 android:text="Pincode :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14sp" />
+                android:textColor="@color/gray_666666"
+                android:textSize="12dp" />
 
             <EditText
                 android:id="@+id/pincode"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text=": sakri"
-                android:textColor="@color/invoice_color"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:layout_height="30sp"
+                android:background="@drawable/edit_text_border"
+                android:maxLength="6"
+                android:paddingLeft="@dimen/dimen_10dp"
+                android:paddingRight="@dimen/dimen_10dp"
+                android:textColor="@color/black"
+                android:textSize="14dp" />
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
-            android:visibility="visible">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
                 android:text="State :"
-                android:textColor="@color/invoice_number_color"
-                android:textSize="14dp" />
+                android:textColor="@color/gray_666666"
+                android:textSize="12dp" />
 
-            <EditText
-                android:id="@+id/state"
+            <Spinner
+                android:id="@+id/states"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="20dp"
-                android:layout_weight="0.9"
-                android:text="View Invoice"
-                android:textColor="@color/invoice_color"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:layout_height="30dp"
+                android:background="@drawable/edit_text_border"
+                android:paddingLeft="@dimen/dimen_10dp"
+                android:paddingRight="@dimen/dimen_10dp" />
 
             <TextView
                 android:id="@+id/updateAddress"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
+                android:layout_height="30dp"
+                android:layout_marginTop="@dimen/dimen_20dp"
                 android:background="@drawable/text1"
                 android:gravity="center"
                 android:text="Update Address"
