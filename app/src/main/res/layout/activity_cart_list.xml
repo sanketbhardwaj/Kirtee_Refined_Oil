@@ -229,12 +229,14 @@
                             android:digits="0123456789QWERTYUIOPLKJHGFDSAZXCVBNMqwertyuioplkjhgfdsazxcvbnm"
                             android:focusedByDefault="false"
                             android:hint="Enter Coupon"
+                            android:imeOptions="actionDone"
                             android:maxLength="6"
                             android:paddingStart="@dimen/dimen_10dp"
                             android:paddingBottom="2dp"
                             android:textAllCaps="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/gray_686868"
+                            android:textCursorDrawable="@color/app_color"
                             android:textSize="14dp" />
 
                         <TextView
@@ -325,6 +327,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
+                                android:buttonTint="@color/app_color"
                                 android:text="Online"
                                 android:textColor="@color/black" />
 
@@ -333,6 +336,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
+                                android:buttonTint="@color/app_color"
                                 android:text="COD"
                                 android:textColor="@color/black" />
                         </RadioGroup>

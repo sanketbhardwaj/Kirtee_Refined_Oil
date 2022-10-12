@@ -40,6 +40,9 @@ public class Adapter_transaction extends RecyclerView.Adapter<Adapter_transactio
         viewHolder.payment_mode.setText(d.getPaymentType());
         viewHolder.payment_status.setText(d.getPaymentStatus());
         viewHolder.transaction_id.setText(d.getTransactionId());
+        if (d.getTransactionId().isEmpty()) {
+            viewHolder.transaction_idLayout.setVisibility(View.GONE);
+        }
         viewHolder.order_status.setText(d.getOrderStatus());
         if (d.getOrderStatus().equals("Cancelled")) {
             viewHolder.viewInvoice.setVisibility(View.INVISIBLE);
@@ -50,6 +53,26 @@ public class Adapter_transaction extends RecyclerView.Adapter<Adapter_transactio
                 Intent intent = new Intent(context, orderHistoryDetails.class);
                 intent.putExtra("items", d.getItems());
                 intent.putExtra("orderUid", d.getOrderUid());
+                intent.putExtra("address", d.getAddress());
+                intent.putExtra("city", d.getCity());
+                intent.putExtra("state", d.getState());
+                intent.putExtra("pincode", d.getPincode());
+                intent.putExtra("orderStatus", d.getOrderStatus());
+                intent.putExtra("paymentStatus", d.getPaymentStatus());
+                intent.putExtra("paymentMode", d.getPaymentType());
+                intent.putExtra("invoice", d.getInvoice());
+                intent.putExtra("deliveredOn", d.getDeliveredTime());
+                intent.putExtra("cancelledOn", d.getCancelledTime());
+                intent.putExtra("refundOn", d.getRefundTime());
+                intent.putExtra("transactionId", d.getTransactionId());
+                intent.putExtra("coupon", d.getCoupon());
+                intent.putExtra("invoiceNumber", d.getInvoiceNo());
+                intent.putExtra("total", d.getTotal());
+                intent.putExtra("discount", d.getDiscountAmount());
+                intent.putExtra("gst", d.getGst());
+                intent.putExtra("grandTotal", d.getGrandTotal());
+                intent.putExtra("rounded", d.getRounded());
+                intent.putExtra("paidAmount", d.getGrandPricePaid());
                 context.startActivity(intent);
             }
         });
@@ -72,11 +95,12 @@ public class Adapter_transaction extends RecyclerView.Adapter<Adapter_transactio
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView date, viewInvoice, invoice_no, invoice_amt, payment_mode, payment_status, transaction_id, order_status;
-        LinearLayout linearLayout;
+        LinearLayout linearLayout, transaction_idLayout;
 
         public MyViewHolder(View view) {
             super(view);
             linearLayout = itemView.findViewById(R.id.linearLayout);
+            transaction_idLayout = itemView.findViewById(R.id.transaction_idLayout);
             date = itemView.findViewById(R.id.date);
             invoice_no = itemView.findViewById(R.id.invoice_no);
             viewInvoice = itemView.findViewById(R.id.viewInvoice);

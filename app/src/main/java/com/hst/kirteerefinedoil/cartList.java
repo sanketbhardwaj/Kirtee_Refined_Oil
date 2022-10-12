@@ -813,7 +813,6 @@ public class cartList extends AppCompatActivity {
 
                     }
                 } catch (JSONException e) {
-                    //    Toast.makeText(Login_activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
 
                 }
@@ -836,13 +835,12 @@ public class cartList extends AppCompatActivity {
 
                 // Adding All values to Params.
                 // The firs argument should be same sa your MySQL database table columns.
-                if (paymentMethod.equals("Online")) {
-                    params.put("transactionId", transactionId);
-                    params.put("orderId", orderId);
-                }
+
                 params.put("userUid", SplashScreen.Uid);
                 params.put("paymentType", paymentMethod);
-                params.put("coupon", activityCartListBinding.coupon.getText().toString());
+                if (!activityCartListBinding.coupon.getText().toString().isEmpty()) {
+                    params.put("coupon", activityCartListBinding.coupon.getText().toString());
+                }
                 params.put("subTotal", subTotal);
                 params.put("total", total);
                 params.put("discountAmount", discount);
@@ -850,7 +848,10 @@ public class cartList extends AppCompatActivity {
                 params.put("city", SplashScreen.city);
                 params.put("state", SplashScreen.state);
                 params.put("pincode", SplashScreen.pinCode);
-
+                if (paymentMethod.equals("Online")) {
+                    params.put("transactionId", transactionId);
+                    params.put("orderId", orderId);
+                }
                 params.put("gst", gst);
                 params.put("grandTotal", grandTotal);
                 params.put("rounded", rounded);

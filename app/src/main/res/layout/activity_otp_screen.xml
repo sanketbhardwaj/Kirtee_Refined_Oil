@@ -42,7 +42,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="OTP has been sent to your mobie\n number. please verify"
+            android:text="OTP has been sent to your mobile\n number. please verify"
+            android:textColor="@color/black"
             android:textSize="14dp" />
 
         <LinearLayout
@@ -54,14 +55,15 @@
             <EditText
                 android:id="@+id/first_text"
                 android:layout_width="match_parent"
-
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/bordercredentials_otp_left"
                 android:gravity="center"
+                android:imeOptions="actionNext"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textCursorDrawable="@color/app_color" />
 
             <EditText
                 android:id="@+id/second_text"
@@ -70,24 +72,26 @@
                 android:layout_weight="1"
                 android:background="@drawable/bordercredentials_otp_midlle"
                 android:digits="1234567890"
-
                 android:gravity="center"
+                android:imeOptions="actionNext"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textCursorDrawable="@color/app_color" />
 
             <EditText
                 android:id="@+id/third_text"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_weight="1"
-
                 android:background="@drawable/bordercredentials_otp_midlle"
                 android:digits="1234567890"
                 android:gravity="center"
+                android:imeOptions="actionNext"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textCursorDrawable="@color/app_color" />
 
             <EditText
                 android:id="@+id/fourth_text"
@@ -98,10 +102,11 @@
                 android:background="@drawable/bordercredentials_otp_right"
                 android:digits="1234567890"
                 android:gravity="center"
+                android:imeOptions="actionDone"
                 android:inputType="number"
                 android:maxLength="1"
-
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textCursorDrawable="@color/app_color" />
 
         </LinearLayout>
 

@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -26,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.hst.kirteerefinedoil.Adapter_offer_slider;
 import com.hst.kirteerefinedoil.Adapter_product_list;
 import com.hst.kirteerefinedoil.CartCount;
+import com.hst.kirteerefinedoil.LoginActivity;
 import com.hst.kirteerefinedoil.R;
 import com.hst.kirteerefinedoil.SplashScreen;
 import com.hst.kirteerefinedoil.Utilities.Constant;
@@ -42,7 +42,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HomeFragment extends Fragment implements CartCount {
+public class HomeFragment extends Fragment {
 
     private static final long ANIM_VIEWPAGER_DELAY = 3000;
     private final boolean pagerMoved = false;
@@ -52,8 +52,7 @@ public class HomeFragment extends Fragment implements CartCount {
     RequestQueue requestQueue;
     private FragmentHomeBinding binding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         binding.categoryDetailRv.setHasFixedSize(false);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
@@ -63,13 +62,23 @@ public class HomeFragment extends Fragment implements CartCount {
         binding.cartCount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), cartList.class));
+                if (SplashScreen.Uid.equals("N")) {
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                } else {
+                    startActivity(new Intent(getContext(), cartList.class));
+                }
+
             }
         });
         binding.cartImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), cartList.class));
+                if (SplashScreen.Uid.equals("N")) {
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                } else {
+                    startActivity(new Intent(getContext(), cartList.class));
+                }
+
             }
         });
         productList();
@@ -187,79 +196,73 @@ public class HomeFragment extends Fragment implements CartCount {
         // Creating Volley newRequestQueue .
         requestQueue = Volley.newRequestQueue(getContext());
         // Creating string request with post method.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.PRODUCT_LIST,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String ServerResponse) {
-                        JSONObject j = null;
-                        try {
-                            j = new JSONObject(ServerResponse);
-                            if (ServerResponse.length() == 21) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.PRODUCT_LIST, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String ServerResponse) {
+                JSONObject j = null;
+                try {
+                    j = new JSONObject(ServerResponse);
+                    if (ServerResponse.length() == 21) {
 
-                            } else {
+                    } else {
                                 /*
                                  no_cutomers.setVisibility(View.GONE);
                                  */
-                                Toast.makeText(getContext(), j.getString("cartCount"), Toast.LENGTH_SHORT).show();
-                                binding.cartCount.setText(j.getString("cartCount"));
-                                JSONArray applist = j.getJSONArray("offerList");
-                                if (applist != null && applist.length() > 0) {
-                                    dm.clear();
-                                    for (int i = 0; i < applist.length(); i++) {
-                                        modelOffer ds = new modelOffer();
-                                        JSONObject jsonObject = applist.getJSONObject(i);
-                                        ds.setDate(jsonObject.getString("date"));
-                                        ds.setCover(jsonObject.getString("cover"));
-                                        ds.setOfferUid(jsonObject.getString("offerUid"));
-                                        dm.add(ds);
-                                    }
-
-                                    Adapter_offer_slider adapter = new Adapter_offer_slider(getContext(), dm);
-                                    binding.viewpage.setAdapter(adapter);
-
-                                }
-                                JSONArray applists = j.getJSONArray("productList");
-                                if (applists != null && applists.length() > 0) {
-                                    dm1.clear();
-                                    for (int i = 0; i < applists.length(); i++) {
-                                        modelProduct ds = new modelProduct();
-                                        JSONObject jsonObject = applists.getJSONObject(i);
-                                        ds.setProductUid(jsonObject.getString("productUid"));
-                                        ds.setDate(jsonObject.getString("date"));
-                                        ds.setName(jsonObject.getString("name"));
-                                        ds.setDescription(jsonObject.getString("description"));
-                                        ds.setPrice(jsonObject.getString("price"));
-                                        ds.setImg(jsonObject.getString("img"));
-                                        dm1.add(ds);
-
-                                    }
-                                    Adapter_product_list adapter = new Adapter_product_list(getContext(), dm1, new CartCount() {
-                                        @Override
-                                        public void cartCount(String cartCount) {
-                                            binding.cartCount.setText(cartCount);
-                                            Toast.makeText(getContext(), cartCount, Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                    binding.categoryDetailRv.setAdapter(adapter);
-                                    binding.shimmerViewContainer.setVisibility(View.GONE);
-                                }
+                        binding.cartCount.setText(j.getString("cartCount"));
+                        JSONArray applist = j.getJSONArray("offerList");
+                        if (applist != null && applist.length() > 0) {
+                            dm.clear();
+                            for (int i = 0; i < applist.length(); i++) {
+                                modelOffer ds = new modelOffer();
+                                JSONObject jsonObject = applist.getJSONObject(i);
+                                ds.setDate(jsonObject.getString("date"));
+                                ds.setCover(jsonObject.getString("cover"));
+                                ds.setOfferUid(jsonObject.getString("offerUid"));
+                                dm.add(ds);
                             }
 
-                        } catch (JSONException e) {
-                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Adapter_offer_slider adapter = new Adapter_offer_slider(getContext(), dm);
+                            binding.viewpage.setAdapter(adapter);
 
-                            e.printStackTrace();
                         }
+                        JSONArray applists = j.getJSONArray("productList");
+                        if (applists != null && applists.length() > 0) {
+                            dm1.clear();
+                            for (int i = 0; i < applists.length(); i++) {
+                                modelProduct ds = new modelProduct();
+                                JSONObject jsonObject = applists.getJSONObject(i);
+                                ds.setProductUid(jsonObject.getString("productUid"));
+                                ds.setDate(jsonObject.getString("date"));
+                                ds.setName(jsonObject.getString("name"));
+                                ds.setDescription(jsonObject.getString("description"));
+                                ds.setPrice(jsonObject.getString("price"));
+                                ds.setImg(jsonObject.getString("img"));
+                                dm1.add(ds);
 
+                            }
+                            Adapter_product_list adapter = new Adapter_product_list(getContext(), dm1, new CartCount() {
+                                @Override
+                                public void cartCount(String cartCount) {
+                                    binding.cartCount.setText(cartCount);
+                                }
+                            });
+                            binding.categoryDetailRv.setAdapter(adapter);
+                            binding.shimmerViewContainer.setVisibility(View.GONE);
+                        }
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
 
-                        NetworkDialog1();
-                    }
-                }) {
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                NetworkDialog1();
+            }
+        }) {
 
             @Override
             protected Map<String, String> getParams() {
@@ -300,10 +303,6 @@ public class HomeFragment extends Fragment implements CartCount {
         dialogs.show();
     }
 
-    @Override
-    public void cartCount(String text) {
-        Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
-    }
 
     private final Runnable animateViewPager = new Runnable() {
         @Override

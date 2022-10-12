@@ -11,7 +11,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,7 +41,6 @@ public class Adapter_cart_list extends RecyclerView.Adapter<Adapter_cart_list.My
         this.context = context;
         this.data = data;
         this.cartCountChange = cartCountChange;
-        Toast.makeText(context, String.valueOf(data.get(0).getItemName()), Toast.LENGTH_SHORT).show();
 
     }
 
@@ -66,7 +64,6 @@ public class Adapter_cart_list extends RecyclerView.Adapter<Adapter_cart_list.My
         viewHolder.addItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, d.getCartUid(), Toast.LENGTH_SHORT).show();
                 addItem(d.getCartUid());
             }
         });

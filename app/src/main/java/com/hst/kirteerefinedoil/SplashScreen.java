@@ -47,7 +47,15 @@ public class SplashScreen extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
+                    Uid = "N";
+                    name = "N";
+                    mobile_no = "N";
+                    address = "N";
+                    email = "N";
+                    state = "N";
+                    city = "N";
+                    pinCode = "N";
+                    Intent intent = new Intent(SplashScreen.this, homeScreen.class);
                     startActivity(intent);
                     finish();
 
@@ -67,63 +75,61 @@ public class SplashScreen extends AppCompatActivity {
         // Creating Volley newRequestQueue .
         requestQueue = Volley.newRequestQueue(SplashScreen.this);
         // Creating string request with post method.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.GET_USER_INFO,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String ServerResponse) {
-                        // Hiding the progress dialog after all task complete.
-                        // Matching server responce message to our text.
-                        JSONObject j = null;
-                        try {
-                            j = new JSONObject(ServerResponse);
-                            String result = j.getString("result");
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.GET_USER_INFO, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String ServerResponse) {
+                // Hiding the progress dialog after all task complete.
+                // Matching server responce message to our text.
+                JSONObject j = null;
+                try {
+                    j = new JSONObject(ServerResponse);
+                    String result = j.getString("result");
 
-                            if (result.equals("Success")) {
-                                // If response matched then show the toast.
-                                // Finish the current Login activity
-                                Uid = j.getString("userUid");
-                                name = j.getString("name");
-                                mobile_no = j.getString("mobile");
-                                address = j.getString("address");
-                                email = j.getString("email");
-                                state = j.getString("state");
-                                city = j.getString("city");
-                                pinCode = j.getString("pincode");
-                                Intent intent = new Intent(SplashScreen.this, homeScreen.class);
+                    if (result.equals("Success")) {
+                        // If response matched then show the toast.
+                        // Finish the current Login activity
+                        Uid = j.getString("userUid");
+                        name = j.getString("name");
+                        mobile_no = j.getString("mobile");
+                        address = j.getString("address");
+                        email = j.getString("email");
+                        state = j.getString("state");
+                        city = j.getString("city");
+                        pinCode = j.getString("pincode");
+                        Intent intent = new Intent(SplashScreen.this, homeScreen.class);
+                        startActivity(intent);
+                        finish();
+
+
+                    } else {
+                        AlertDialog.Builder alert = new AlertDialog.Builder(SplashScreen.this);
+                        alert.setTitle("Notice");
+                        alert.setMessage(j.getString("status"));
+                        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
                                 startActivity(intent);
                                 finish();
-
-
-                            } else {
-                                AlertDialog.Builder alert = new AlertDialog.Builder(SplashScreen.this);
-                                alert.setTitle("Notice");
-                                alert.setMessage(j.getString("status"));
-                                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                });
-                                alert.show();
-
                             }
-                        } catch (JSONException e) {
-                            //    Toast.makeText(Login_activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
+                        });
+                        alert.show();
 
-                        }
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        // Hiding the progress dialog after all task complete.
-                        progressDialog.dismiss();
-                        NetworkDialog();
-                    }
-                }) {
+                } catch (JSONException e) {
+                    //    Toast.makeText(Login_activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                // Hiding the progress dialog after all task complete.
+                progressDialog.dismiss();
+                NetworkDialog();
+            }
+        }) {
 
 
             @Override

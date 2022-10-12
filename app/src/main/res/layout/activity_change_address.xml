@@ -94,10 +94,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/edit_text_border"
+                android:imeOptions="actionNext"
                 android:lines="4"
                 android:paddingLeft="@dimen/dimen_10dp"
                 android:paddingRight="@dimen/dimen_10dp"
                 android:textColor="@color/black"
+                android:textCursorDrawable="@color/app_color"
                 android:textSize="14dp" />
 
 
@@ -117,9 +119,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="30sp"
                 android:background="@drawable/edit_text_border"
+                android:imeOptions="actionNext"
                 android:paddingLeft="@dimen/dimen_10dp"
                 android:paddingRight="@dimen/dimen_10dp"
                 android:textColor="@color/black"
+                android:textCursorDrawable="@color/app_color"
                 android:textSize="14dp" />
 
 
@@ -137,10 +141,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="30sp"
                 android:background="@drawable/edit_text_border"
+                android:imeOptions="actionDone"
                 android:maxLength="6"
                 android:paddingLeft="@dimen/dimen_10dp"
                 android:paddingRight="@dimen/dimen_10dp"
                 android:textColor="@color/black"
+                android:textCursorDrawable="@color/app_color"
                 android:textSize="14dp" />
 
 

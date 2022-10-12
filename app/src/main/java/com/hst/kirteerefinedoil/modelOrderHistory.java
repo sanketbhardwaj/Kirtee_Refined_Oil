@@ -27,6 +27,16 @@ public class modelOrderHistory {
     private String transactionId;
     private String paymentStatus;
 
+    private String total;
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
+
     public String getOrderUid() {
         return orderUid;
     }

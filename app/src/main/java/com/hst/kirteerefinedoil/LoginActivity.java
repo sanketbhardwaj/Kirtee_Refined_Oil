@@ -86,23 +86,30 @@ public class LoginActivity extends AppCompatActivity {
                             if (result.equals("Success")) {
                                 // If response matched then show the toast.
                                 // Finish the current Login activity
-                                SplashScreen.Uid = j.getString("userUid");
+                               /* SplashScreen.Uid = j.getString("userUid");
                                 SplashScreen.name = j.getString("name");
                                 SplashScreen.mobile_no = j.getString("mobile");
                                 SplashScreen.address = j.getString("address");
                                 SplashScreen.email = j.getString("email");
                                 SplashScreen.state = j.getString("state");
                                 SplashScreen.city = j.getString("city");
-                                SplashScreen.pinCode = j.getString("pincode");
+                                SplashScreen.pinCode = j.getString("pincode");*/
 
                                 String otp = j.getString("otp");
                                 Toast.makeText(LoginActivity.this, otp, Toast.LENGTH_SHORT).show();
 
                                 Intent intent = new Intent(LoginActivity.this, OtpScreen.class);
                                 intent.putExtra("uid", j.getString("userUid"));
-                                intent.putExtra("otp", otp);
+                                intent.putExtra("otp", j.getString("otp"));
+                                intent.putExtra("name", j.getString("name"));
+                                intent.putExtra("mobile", j.getString("mobile"));
+                                intent.putExtra("address", j.getString("address"));
+                                intent.putExtra("email", j.getString("email"));
+                                intent.putExtra("city", j.getString("city"));
+                                intent.putExtra("pincode", j.getString("pincode"));
+                                intent.putExtra("state", j.getString("state"));
                                 startActivity(intent);
-                                finish();
+                                //  finish();
 
                             } else {
                                 AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);

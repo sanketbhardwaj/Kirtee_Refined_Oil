@@ -1,6 +1,8 @@
 package com.hst.kirteerefinedoil;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,9 +19,24 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.hst.kirteerefinedoil.Utilities.Constant;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class OtpScreen extends AppCompatActivity {
-    String otp, name, mobile, passoword, email, state, city;
+    String otp, name, mobile, pincode, address, email, state, city;
     EditText first, second, third, fourth;
+    RequestQueue requestQueue;
     SessionManager session;
     Button verify;
     TextView resend;
@@ -30,8 +48,7 @@ public class OtpScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_screen);
         session = new SessionManager(getApplicationContext());
-        otp = getIntent().getStringExtra("otp");
-        uid = getIntent().getStringExtra("uid");
+
         first = findViewById(R.id.first_text);
         second = findViewById(R.id.second_text);
         third = findViewById(R.id.third_text);
@@ -40,11 +57,13 @@ public class OtpScreen extends AppCompatActivity {
         verify = findViewById(R.id.verify);
         name = getIntent().getStringExtra("name");
         mobile = getIntent().getStringExtra("mobile");
-        passoword = getIntent().getStringExtra("password");
         email = getIntent().getStringExtra("email");
         state = getIntent().getStringExtra("state");
         city = getIntent().getStringExtra("city");
-
+        pincode = getIntent().getStringExtra("pincode");
+        address = getIntent().getStringExtra("address");
+        otp = getIntent().getStringExtra("otp");
+        uid = getIntent().getStringExtra("uid");
         new CountDownTimer(120000, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -62,9 +81,7 @@ public class OtpScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (resend.getText().toString().equals("RESEND CODE")) {
-                    // otp_send_api = spinnerss.getSelectedItem().toString().replace("{mobile}", mobile).replace("{page}", "CREATE_ACCOUNT").replace("{ReferalCode}", refer_code);
-                    // otpsend();
-                    // Login_resend();
+                    resendOtp();
                     try {
                         new CountDownTimer(120000, 1000) {
 
@@ -94,6 +111,14 @@ public class OtpScreen extends AppCompatActivity {
                 if (otp_t.equals(otp)) {
                     //  Login();
                     session.createLoginSession(uid);
+                    SplashScreen.Uid = getIntent().getStringExtra("uid");
+                    SplashScreen.name = getIntent().getStringExtra("name");
+                    SplashScreen.mobile_no = getIntent().getStringExtra("mobile");
+                    SplashScreen.address = getIntent().getStringExtra("address");
+                    SplashScreen.email = getIntent().getStringExtra("email");
+                    SplashScreen.state = getIntent().getStringExtra("state");
+                    SplashScreen.city = getIntent().getStringExtra("city");
+                    SplashScreen.pinCode = getIntent().getStringExtra("pincode");
                     Intent intent = new Intent(OtpScreen.this, homeScreen.class);
                     startActivity(intent);
 
@@ -192,5 +217,106 @@ public class OtpScreen extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void resendOtp() {
+        // Assigning Activity this to progress dialog.
+        progressDialog = new ProgressDialog(OtpScreen.this);
+        // Showing progress dialog at user registration time.
+        progressDialog.setMessage("Please Wait");
+        progressDialog.show();
+
+        // Creating Volley newRequestQueue .
+        requestQueue = Volley.newRequestQueue(OtpScreen.this);
+        // Creating string request with post method.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.LOGIN_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String ServerResponse) {
+                // Hiding the progress dialog after all task complete.
+                progressDialog.dismiss();
+                // Matching server responce message to our text.
+                JSONObject j = null;
+                try {
+                    j = new JSONObject(ServerResponse);
+                    String result = j.getString("result");
+
+                    if (result.equals("Success")) {
+                        // If response matched then show the toast.
+                        // Finish the current Login activity
+                        SplashScreen.Uid = j.getString("userUid");
+                        SplashScreen.name = j.getString("name");
+                        SplashScreen.mobile_no = j.getString("mobile");
+                        SplashScreen.address = j.getString("address");
+                        SplashScreen.email = j.getString("email");
+                        SplashScreen.state = j.getString("state");
+                        SplashScreen.city = j.getString("city");
+                        SplashScreen.pinCode = j.getString("pincode");
+
+                        otp = j.getString("otp");
+                        Toast.makeText(OtpScreen.this, otp, Toast.LENGTH_SHORT).show();
+
+
+                    } else {
+                        AlertDialog.Builder alert = new AlertDialog.Builder(OtpScreen.this);
+                        alert.setTitle("Notice");
+                        alert.setMessage(j.getString("status"));
+                        alert.setPositiveButton("OK", null);
+                        alert.show();
+
+                    }
+                } catch (JSONException e) {
+                    //    Toast.makeText(Login_activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                // Hiding the progress dialog after all task complete.
+                progressDialog.dismiss();
+                NetworkDialog();
+            }
+        }) {
+
+
+            @Override
+            protected Map<String, String> getParams() {
+
+                // Creating Map String Params.
+                Map<String, String> params = new HashMap<String, String>();
+
+                // Adding All values to Params.
+                // The firs argument should be same sa your MySQL database table columns.
+                params.put("mobile", mobile);
+                return params;
+            }
+
+        };
+
+        // Creating RequestQueue.
+        RequestQueue requestQueue = Volley.newRequestQueue(OtpScreen.this);
+
+        // Adding the StringRequest object into requestQueue.
+        requestQueue.add(stringRequest);
+
+    }
+
+
+    private void NetworkDialog() {
+        final Dialog dialogs = new Dialog(OtpScreen.this);
+        dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogs.setContentView(R.layout.networkdialog);
+        dialogs.setCanceledOnTouchOutside(false);
+        Button done = (Button) dialogs.findViewById(R.id.done);
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogs.dismiss();
+                resendOtp();
+
+            }
+        });
+        dialogs.show();
     }
 }

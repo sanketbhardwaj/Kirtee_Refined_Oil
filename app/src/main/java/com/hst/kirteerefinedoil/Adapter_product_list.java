@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +62,12 @@ public class Adapter_product_list extends RecyclerView.Adapter<Adapter_product_l
         viewHolder.addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addToCart(d.getProductUid());
+                if (SplashScreen.Uid.equals("N")) {
+                    context.startActivity(new Intent(context, LoginActivity.class));
+                } else {
+                    addToCart(d.getProductUid());
+                }
+
             }
         });
     }

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,11 +36,11 @@ public class Adapter_history_details extends RecyclerView.Adapter<Adapter_histor
     public void onBindViewHolder(MyViewHolder viewHolder, int i) {
         viewHolder.itemView.setTag(data.get(i));
         final modelOrderHistoryDetails d = data.get(i);
-        Toast.makeText(context, String.valueOf(d.getItemName()), Toast.LENGTH_SHORT).show();
         viewHolder.itemName.setText(d.getItemName());
         viewHolder.itemRate.setText(d.getItemRate());
         viewHolder.itemPrice.setText(d.getItemPrice());
-        viewHolder.itemQty.setText(d.getItemQty());
+        viewHolder.itemQty.setText("Qty: " + d.getItemQty());
+        viewHolder.calculations.setText("(" + d.getItemRate() + " x " + d.getItemQty() + ")");
         Glide.with(context).load(d.getItemLogo()).into(viewHolder.itemLogo);
 
     }
@@ -53,12 +52,13 @@ public class Adapter_history_details extends RecyclerView.Adapter<Adapter_histor
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView itemName, itemRate, itemPrice, itemQty;
+        public TextView itemName, itemRate, itemPrice, itemQty, calculations;
         ImageView itemLogo;
 
 
         public MyViewHolder(View view) {
             super(view);
+            calculations = itemView.findViewById(R.id.calculations);
             itemName = itemView.findViewById(R.id.itemName);
             itemRate = itemView.findViewById(R.id.itemRate);
             itemPrice = itemView.findViewById(R.id.itemPrice);

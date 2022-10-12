@@ -30,7 +30,7 @@
                 android:layout_marginRight="15sp"
                 android:layout_weight="1"
                 android:singleLine="true"
-                android:text="Order List"
+                android:text="Order History"
                 android:textColor="#fff"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -69,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="No Follow Ups List Found"
+            android:text="No Orders Available"
             android:textColor="#2b9fd1"
             android:textSize="20dp" />
 
