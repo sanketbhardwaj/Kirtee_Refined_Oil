@@ -11,9 +11,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.hst.kirteerefinedoil.LoginActivity;
+import com.hst.kirteerefinedoil.LoginActivityWithOtp;
 import com.hst.kirteerefinedoil.SessionManager;
 import com.hst.kirteerefinedoil.SplashScreen;
+import com.hst.kirteerefinedoil.changePassword;
 import com.hst.kirteerefinedoil.contactUs;
 import com.hst.kirteerefinedoil.databinding.FragmentProfileBinding;
 
@@ -26,7 +27,7 @@ public class ProfileFragment extends Fragment {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         session = new SessionManager(getContext());
         if (SplashScreen.Uid.equals("N")) {
-            startActivity(new Intent(getContext(), LoginActivity.class));
+            startActivity(new Intent(getContext(), LoginActivityWithOtp.class));
         }
         binding.name.setText(SplashScreen.name);
         binding.mobile.setText(SplashScreen.mobile_no);
@@ -38,6 +39,12 @@ public class ProfileFragment extends Fragment {
         binding.name.setText(SplashScreen.name);
         binding.name.setText(SplashScreen.name);
         binding.name.setText(SplashScreen.name);
+        binding.changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), changePassword.class));
+            }
+        });
         binding.contactUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,7 +54,7 @@ public class ProfileFragment extends Fragment {
         binding.logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), AlertDialog.THEME_HOLO_LIGHT);
                 builder.setMessage("Are you sure you want to logout?").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 

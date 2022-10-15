@@ -88,7 +88,7 @@ public class Adapter_cart_list extends RecyclerView.Adapter<Adapter_cart_list.My
 
     public void addItem(String cartUid) {
         // Assigning Activity this to progress dialog.
-        progressDialog = new ProgressDialog(context);
+        progressDialog = new ProgressDialog(context, AlertDialog.THEME_HOLO_LIGHT);
         // Showing progress dialog at user registration time.
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
@@ -120,7 +120,7 @@ public class Adapter_cart_list extends RecyclerView.Adapter<Adapter_cart_list.My
                         alert.show();*/
 
                     } else {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                        AlertDialog.Builder alert = new AlertDialog.Builder(context, AlertDialog.THEME_HOLO_LIGHT);
                         alert.setTitle("Notice");
                         alert.setMessage(j.getString("status"));
                         alert.setPositiveButton("OK", null);
@@ -185,7 +185,7 @@ public class Adapter_cart_list extends RecyclerView.Adapter<Adapter_cart_list.My
 
     public void minusItem(String cartUid) {
         // Assigning Activity this to progress dialog.
-        progressDialog = new ProgressDialog(context);
+        progressDialog = new ProgressDialog(context, AlertDialog.THEME_HOLO_LIGHT);
         // Showing progress dialog at user registration time.
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
@@ -217,7 +217,7 @@ public class Adapter_cart_list extends RecyclerView.Adapter<Adapter_cart_list.My
                         alert.show();*/
 
                     } else {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                        AlertDialog.Builder alert = new AlertDialog.Builder(context, AlertDialog.THEME_HOLO_LIGHT);
                         alert.setTitle("Notice");
                         alert.setMessage(j.getString("status"));
                         alert.setPositiveButton("OK", null);
@@ -282,7 +282,7 @@ public class Adapter_cart_list extends RecyclerView.Adapter<Adapter_cart_list.My
 
     public void removeItem(String cartUid) {
         // Assigning Activity this to progress dialog.
-        progressDialog = new ProgressDialog(context);
+        progressDialog = new ProgressDialog(context, AlertDialog.THEME_HOLO_LIGHT);
         // Showing progress dialog at user registration time.
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
@@ -314,7 +314,7 @@ public class Adapter_cart_list extends RecyclerView.Adapter<Adapter_cart_list.My
                         alert.show();*/
 
                     } else {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                        AlertDialog.Builder alert = new AlertDialog.Builder(context, AlertDialog.THEME_HOLO_LIGHT);
                         alert.setTitle("Notice");
                         alert.setMessage(j.getString("status"));
                         alert.setPositiveButton("OK", null);

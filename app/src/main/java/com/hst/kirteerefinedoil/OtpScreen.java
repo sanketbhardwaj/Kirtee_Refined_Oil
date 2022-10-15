@@ -221,7 +221,7 @@ public class OtpScreen extends AppCompatActivity {
 
     public void resendOtp() {
         // Assigning Activity this to progress dialog.
-        progressDialog = new ProgressDialog(OtpScreen.this);
+        progressDialog = new ProgressDialog(OtpScreen.this, AlertDialog.THEME_HOLO_LIGHT);
         // Showing progress dialog at user registration time.
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
@@ -243,6 +243,7 @@ public class OtpScreen extends AppCompatActivity {
                     if (result.equals("Success")) {
                         // If response matched then show the toast.
                         // Finish the current Login activity
+                        uid = j.getString("userUid");
                         SplashScreen.Uid = j.getString("userUid");
                         SplashScreen.name = j.getString("name");
                         SplashScreen.mobile_no = j.getString("mobile");
@@ -257,7 +258,7 @@ public class OtpScreen extends AppCompatActivity {
 
 
                     } else {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(OtpScreen.this);
+                        AlertDialog.Builder alert = new AlertDialog.Builder(OtpScreen.this, AlertDialog.THEME_HOLO_LIGHT);
                         alert.setTitle("Notice");
                         alert.setMessage(j.getString("status"));
                         alert.setPositiveButton("OK", null);
@@ -308,7 +309,7 @@ public class OtpScreen extends AppCompatActivity {
         dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogs.setContentView(R.layout.networkdialog);
         dialogs.setCanceledOnTouchOutside(false);
-        Button done = (Button) dialogs.findViewById(R.id.done);
+        Button done = dialogs.findViewById(R.id.done);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -6,15 +6,44 @@
     android:background="#fff"
     android:orientation="vertical">
 
-    <ImageView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
-        android:src="@drawable/logo"
-        app:tint="@color/app_color" />
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="25dp"
+            android:src="@drawable/drop_logo" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:src="@drawable/logo"
+            app:tint="@color/app_color" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="Healthy Oil\nfor\nThe Healthy You..."
+            android:textColor="@color/app_color"
+            android:textSize="22dp"
+            android:textStyle="bold">
+
+        </TextView>
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
@@ -24,7 +53,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:text="Developed By Highsoft Technologies \n © All Rights Reserved;"
+        android:text="Developed By Highsoft Technologies \n © All Rights Reserved!"
         android:textColor="@color/app_color"
         android:textSize="12dp">
 

@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.hst.kirteerefinedoil.Utilities.Constant;
-import com.hst.kirteerefinedoil.databinding.ActivityChangeAddressBinding;
+import com.hst.kirteerefinedoil.databinding.ActivityChangePasswordBinding;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,54 +27,58 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Change_Address extends AppCompatActivity {
-    ActivityChangeAddressBinding activityChangeAddressBinding;
-    RequestQueue requestQueue;
+public class changePassword extends AppCompatActivity {
+    ActivityChangePasswordBinding activityChangePasswordBinding;
     ProgressDialog progressDialog;
-    String[] states = {"Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttarakhand", "Uttar Pradesh", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Lakshadweep", "Puducherry"};
+    RequestQueue requestQueue;
+    SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityChangeAddressBinding = ActivityChangeAddressBinding.inflate(getLayoutInflater());
-        View view = activityChangeAddressBinding.getRoot();
+        activityChangePasswordBinding = ActivityChangePasswordBinding.inflate(getLayoutInflater());
+        View view = activityChangePasswordBinding.getRoot();
         setContentView(view);
-
-        ArrayAdapter aa = new ArrayAdapter(this, R.layout.spinner_layout_selected, states);
-        aa.setDropDownViewResource(R.layout.spinner_layout);
-        //Setting the ArrayAdapter data on the Spinner
-        activityChangeAddressBinding.states.setAdapter(aa);
-
-
-        activityChangeAddressBinding.backBtn.setOnClickListener(new View.OnClickListener() {
+        session = new SessionManager(changePassword.this);
+        activityChangePasswordBinding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
-        activityChangeAddressBinding.address.setText(SplashScreen.address);
-        activityChangeAddressBinding.states.setSelection(aa.getPosition(SplashScreen.state));
-        activityChangeAddressBinding.pincode.setText(SplashScreen.pinCode);
-        activityChangeAddressBinding.city.setText(SplashScreen.city);
-        activityChangeAddressBinding.updateAddress.setOnClickListener(new View.OnClickListener() {
+        activityChangePasswordBinding.btnChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateAddress();
+                if (activityChangePasswordBinding.currentPassword.getText().toString().isEmpty()) {
+                    activityChangePasswordBinding.currentPassword.setError("Please Enter Current Password");
+                } else if (activityChangePasswordBinding.newPassword.getText().toString().isEmpty()) {
+                    activityChangePasswordBinding.newPassword.setError("Please Enter New Password");
+                } else if (activityChangePasswordBinding.confirmPassword.getText().toString().isEmpty()) {
+                    activityChangePasswordBinding.confirmPassword.setError("Please Enter Again New Password");
+                } else if (!activityChangePasswordBinding.newPassword.getText().equals(activityChangePasswordBinding.confirmPassword.getText())) {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(changePassword.this, AlertDialog.THEME_HOLO_LIGHT);
+                    alert.setTitle("Notice");
+                    alert.setMessage("New Password and Confirm Password should be same!");
+                    alert.setPositiveButton("OK", null);
+                    alert.show();
+                } else {
+                    updatePassword();
+                }
             }
         });
     }
 
-    public void updateAddress() {
+    public void updatePassword() {
         // Assigning Activity this to progress dialog.
-        progressDialog = new ProgressDialog(Change_Address.this, AlertDialog.THEME_HOLO_LIGHT);
+        progressDialog = new ProgressDialog(changePassword.this, AlertDialog.THEME_HOLO_LIGHT);
         // Showing progress dialog at user registration time.
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
 
         // Creating Volley newRequestQueue .
-        requestQueue = Volley.newRequestQueue(Change_Address.this);
+        requestQueue = Volley.newRequestQueue(changePassword.this);
         // Creating string request with post method.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.UPDATE_ADDRESS, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.UPDATE_PASSWORD, new Response.Listener<String>() {
             @Override
             public void onResponse(String ServerResponse) {
                 // Hiding the progress dialog after all task complete.
@@ -85,30 +88,34 @@ public class Change_Address extends AppCompatActivity {
                 try {
                     j = new JSONObject(ServerResponse);
                     String result = j.getString("result");
-                    //Cart_count = j.getString("cartCount");
-                    //cartCount.cartCount(j.getString("cartCount"));
 
                     if (result.equals("Success")) {
                         // If response matched then show the toast.
                         // Finish the current Login activity
-                        SplashScreen.address = activityChangeAddressBinding.address.getText().toString();
-                        SplashScreen.city = activityChangeAddressBinding.city.getText().toString();
-                        SplashScreen.pinCode = activityChangeAddressBinding.pincode.getText().toString();
-                        SplashScreen.state = activityChangeAddressBinding.states.getSelectedItem().toString();
-                        AlertDialog.Builder alert = new AlertDialog.Builder(Change_Address.this, AlertDialog.THEME_HOLO_LIGHT);
+                               /* SplashScreen.Uid = j.getString("userUid");
+                                SplashScreen.name = j.getString("name");
+                                SplashScreen.mobile_no = j.getString("mobile");
+                                SplashScreen.address = j.getString("address");
+                                SplashScreen.email = j.getString("email");
+                                SplashScreen.state = j.getString("state");
+                                SplashScreen.city = j.getString("city");
+                                SplashScreen.pinCode = j.getString("pincode");*/
+
+                        AlertDialog.Builder alert = new AlertDialog.Builder(changePassword.this, AlertDialog.THEME_HOLO_LIGHT);
                         alert.setTitle("Notice");
+                        alert.setMessage(j.getString("status"));
                         alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                finish();
-                                startActivity(new Intent(Change_Address.this, cartList.class));
+                                session.logoutUser();
+                                startActivity(new Intent(changePassword.this, LoginWithBackground.class));
                             }
                         });
-                        alert.setMessage(j.getString("status"));
                         alert.show();
+                        //  finish();
 
                     } else {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(Change_Address.this, AlertDialog.THEME_HOLO_LIGHT);
+                        AlertDialog.Builder alert = new AlertDialog.Builder(changePassword.this, AlertDialog.THEME_HOLO_LIGHT);
                         alert.setTitle("Notice");
                         alert.setMessage(j.getString("status"));
                         alert.setPositiveButton("OK", null);
@@ -139,28 +146,25 @@ public class Change_Address extends AppCompatActivity {
 
                 // Adding All values to Params.
                 // The firs argument should be same sa your MySQL database table columns.
+                params.put("password", activityChangePasswordBinding.newPassword.getText().toString());
+                params.put("currentPassword", activityChangePasswordBinding.currentPassword.getText().toString());
                 params.put("userUid", SplashScreen.Uid);
-                params.put("address", activityChangeAddressBinding.address.getText().toString());
-                params.put("city", activityChangeAddressBinding.city.getText().toString());
-                params.put("pincode", activityChangeAddressBinding.pincode.getText().toString());
-                params.put("state", activityChangeAddressBinding.states.getSelectedItem().toString());
-
-
                 return params;
             }
 
         };
 
         // Creating RequestQueue.
-        RequestQueue requestQueue = Volley.newRequestQueue(Change_Address.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(changePassword.this);
 
         // Adding the StringRequest object into requestQueue.
         requestQueue.add(stringRequest);
 
     }
 
+
     private void NetworkDialog() {
-        final Dialog dialogs = new Dialog(Change_Address.this);
+        final Dialog dialogs = new Dialog(changePassword.this);
         dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogs.setContentView(R.layout.networkdialog);
         dialogs.setCanceledOnTouchOutside(false);
@@ -169,7 +173,7 @@ public class Change_Address extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialogs.dismiss();
-                updateAddress();
+                updatePassword();
 
             }
         });

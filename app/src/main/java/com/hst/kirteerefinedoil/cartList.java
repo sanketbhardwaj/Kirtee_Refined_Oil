@@ -60,7 +60,7 @@ public class cartList extends AppCompatActivity {
         activityCartListBinding.seeMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
+                AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this, AlertDialog.THEME_HOLO_LIGHT);
                 alert.setTitle("Delivery Address");
                 alert.setMessage("Address: " + SplashScreen.address + "\n" + "City: " + SplashScreen.city + "\n" + "Pincode: " + SplashScreen.pinCode + "\n" + "State: " + SplashScreen.state);
                 alert.setPositiveButton("OK", null);
@@ -293,7 +293,7 @@ public class cartList extends AppCompatActivity {
 
     public void StartPayment() {
         // Assigning Activity this to progress dialog.
-        progressDialog = new ProgressDialog(cartList.this);
+        progressDialog = new ProgressDialog(cartList.this, AlertDialog.THEME_HOLO_LIGHT);
         // Showing progress dialog at user registration time.
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
@@ -330,7 +330,7 @@ public class cartList extends AppCompatActivity {
                                 alert.show();*/
 
                     } else {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
+                        AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this, AlertDialog.THEME_HOLO_LIGHT);
                         alert.setTitle("Notice");
                         alert.setMessage(j.getString("status"));
                         alert.setPositiveButton("OK", null);
@@ -398,7 +398,7 @@ public class cartList extends AppCompatActivity {
 
     public void clearAll() {
         // Assigning Activity this to progress dialog.
-        progressDialog = new ProgressDialog(cartList.this);
+        progressDialog = new ProgressDialog(cartList.this, AlertDialog.THEME_HOLO_LIGHT);
         // Showing progress dialog at user registration time.
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
@@ -431,7 +431,7 @@ public class cartList extends AppCompatActivity {
                         getCartList();
 
                     } else {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
+                        AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this, AlertDialog.THEME_HOLO_LIGHT);
                         alert.setTitle("Notice");
                         alert.setMessage(j.getString("status"));
                         alert.setPositiveButton("OK", null);
@@ -497,7 +497,7 @@ public class cartList extends AppCompatActivity {
 
     public void applyCoupon() {
         // Assigning Activity this to progress dialog.
-        progressDialog = new ProgressDialog(cartList.this);
+        progressDialog = new ProgressDialog(cartList.this, AlertDialog.THEME_HOLO_LIGHT);
         // Showing progress dialog at user registration time.
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
@@ -589,7 +589,7 @@ public class cartList extends AppCompatActivity {
                                 alert.show();*/
 
                     } else {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
+                        AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this, AlertDialog.THEME_HOLO_LIGHT);
                         alert.setTitle("Notice");
                         alert.setMessage(j.getString("status"));
                         alert.setPositiveButton("OK", null);
@@ -656,7 +656,7 @@ public class cartList extends AppCompatActivity {
 
     public void CheckPaymentStatus() {
         // Assigning Activity this to progress dialog.
-        progressDialog = new ProgressDialog(cartList.this);
+        progressDialog = new ProgressDialog(cartList.this, AlertDialog.THEME_HOLO_LIGHT);
         // Showing progress dialog at user registration time.
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
@@ -696,7 +696,7 @@ public class cartList extends AppCompatActivity {
 
 
                     } else {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
+                        AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this, AlertDialog.THEME_HOLO_LIGHT);
                         alert.setTitle("Notice");
                         alert.setMessage(j.getString("status"));
                         alert.setPositiveButton("OK", null);
@@ -761,7 +761,7 @@ public class cartList extends AppCompatActivity {
 
     public void orderPlaced() {
         // Assigning Activity this to progress dialog.
-        progressDialog = new ProgressDialog(cartList.this);
+        progressDialog = new ProgressDialog(cartList.this, AlertDialog.THEME_HOLO_LIGHT);
         // Showing progress dialog at user registration time.
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
@@ -805,7 +805,7 @@ public class cartList extends AppCompatActivity {
 
 
                     } else {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
+                        AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this, AlertDialog.THEME_HOLO_LIGHT);
                         alert.setTitle("Notice");
                         alert.setMessage(j.getString("status"));
                         alert.setPositiveButton("OK", null);
@@ -905,7 +905,7 @@ public class cartList extends AppCompatActivity {
 
             @Override
             public void onErrorProceed(String s) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
+                AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this, AlertDialog.THEME_HOLO_LIGHT);
                 alert.setTitle("Notice");
                 alert.setMessage(s);
                 alert.setPositiveButton("OK", null);
@@ -914,7 +914,7 @@ public class cartList extends AppCompatActivity {
 
             @Override
             public void clientAuthenticationFailed(String s) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
+                AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this, AlertDialog.THEME_HOLO_LIGHT);
                 alert.setTitle("Notice");
                 alert.setMessage(s);
                 alert.setPositiveButton("OK", null);
@@ -923,7 +923,7 @@ public class cartList extends AppCompatActivity {
 
             @Override
             public void someUIErrorOccurred(String s) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
+                AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this, AlertDialog.THEME_HOLO_LIGHT);
                 alert.setTitle("Notice");
                 alert.setMessage(s);
                 alert.setPositiveButton("OK", null);
@@ -932,7 +932,7 @@ public class cartList extends AppCompatActivity {
 
             @Override
             public void onErrorLoadingWebPage(int i, String s, String s1) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
+                AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this, AlertDialog.THEME_HOLO_LIGHT);
                 alert.setTitle("Notice");
                 alert.setMessage(s + "\n" + s1);
                 alert.setPositiveButton("OK", null);
@@ -946,7 +946,7 @@ public class cartList extends AppCompatActivity {
 
             @Override
             public void onTransactionCancel(String s, Bundle bundle) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this);
+                AlertDialog.Builder alert = new AlertDialog.Builder(cartList.this, AlertDialog.THEME_HOLO_LIGHT);
                 alert.setTitle("Notice");
                 alert.setMessage(s);
                 alert.setPositiveButton("OK", null);

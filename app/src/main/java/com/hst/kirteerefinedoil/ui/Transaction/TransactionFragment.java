@@ -23,7 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.hst.kirteerefinedoil.Adapter_transaction;
-import com.hst.kirteerefinedoil.LoginActivity;
+import com.hst.kirteerefinedoil.LoginActivityWithOtp;
 import com.hst.kirteerefinedoil.R;
 import com.hst.kirteerefinedoil.SplashScreen;
 import com.hst.kirteerefinedoil.Utilities.Constant;
@@ -53,7 +53,7 @@ public class TransactionFragment extends Fragment {
 
         binding = FragmentTransactionBinding.inflate(inflater, container, false);
         if (SplashScreen.Uid.equals("N")) {
-            startActivity(new Intent(getContext(), LoginActivity.class));
+            startActivity(new Intent(getContext(), LoginActivityWithOtp.class));
         }
         /*binding.arrowback3.setOnClickListener(new View.OnClickListener() {
             @Override

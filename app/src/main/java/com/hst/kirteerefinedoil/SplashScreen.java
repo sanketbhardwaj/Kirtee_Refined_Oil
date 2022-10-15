@@ -29,7 +29,7 @@ import java.util.Map;
 
 public class SplashScreen extends AppCompatActivity {
     public static String Uid, name, state, city, mobile_no, address, email, pinCode;
-    private final int SPLASH_DISPLAY_LENGTH = 500;
+    private final int SPLASH_DISPLAY_LENGTH = 3000;
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
     SessionManager session;
@@ -55,7 +55,7 @@ public class SplashScreen extends AppCompatActivity {
                     state = "N";
                     city = "N";
                     pinCode = "N";
-                    Intent intent = new Intent(SplashScreen.this, homeScreen.class);
+                    Intent intent = new Intent(SplashScreen.this, LoginWithBackground.class);
                     startActivity(intent);
                     finish();
 
@@ -102,13 +102,13 @@ public class SplashScreen extends AppCompatActivity {
 
 
                     } else {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(SplashScreen.this);
+                        AlertDialog.Builder alert = new AlertDialog.Builder(SplashScreen.this, AlertDialog.THEME_HOLO_LIGHT);
                         alert.setTitle("Notice");
                         alert.setMessage(j.getString("status"));
                         alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
+                                Intent intent = new Intent(SplashScreen.this, LoginActivityWithOtp.class);
                                 startActivity(intent);
                                 finish();
                             }
@@ -160,7 +160,7 @@ public class SplashScreen extends AppCompatActivity {
         dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogs.setContentView(R.layout.networkdialog);
         dialogs.setCanceledOnTouchOutside(false);
-        Button done = (Button) dialogs.findViewById(R.id.done);
+        Button done = dialogs.findViewById(R.id.done);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

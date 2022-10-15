@@ -25,7 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.hst.kirteerefinedoil.Adapter_offer_slider;
 import com.hst.kirteerefinedoil.Adapter_product_list;
 import com.hst.kirteerefinedoil.CartCount;
-import com.hst.kirteerefinedoil.LoginActivity;
+import com.hst.kirteerefinedoil.LoginActivityWithOtp;
 import com.hst.kirteerefinedoil.R;
 import com.hst.kirteerefinedoil.SplashScreen;
 import com.hst.kirteerefinedoil.Utilities.Constant;
@@ -63,7 +63,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (SplashScreen.Uid.equals("N")) {
-                    startActivity(new Intent(getContext(), LoginActivity.class));
+                    startActivity(new Intent(getContext(), LoginActivityWithOtp.class));
                 } else {
                     startActivity(new Intent(getContext(), cartList.class));
                 }
@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (SplashScreen.Uid.equals("N")) {
-                    startActivity(new Intent(getContext(), LoginActivity.class));
+                    startActivity(new Intent(getContext(), LoginActivityWithOtp.class));
                 } else {
                     startActivity(new Intent(getContext(), cartList.class));
                 }
@@ -91,91 +91,6 @@ public class HomeFragment extends Fragment {
         binding = null;
     }
 
-    /*public void Login() {
-        // Assigning Activity this to progress dialog.
-        // Creating Volley newRequestQueue .
-        requestQueue = Volley.newRequestQueue(getContext());
-        // Creating string request with post method.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.PRODUCT_LIST,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String ServerResponse) {
-                        JSONObject j = null;
-                        try {
-                            j = new JSONObject(ServerResponse);
-                            if (ServerResponse.length() == 21) {
-
-                            } else {
-                                *//*   no_cutomers.setVisibility(View.GONE);
-     *//*
-
-                            }
-
-                            // Finish the current Login activity.
-                            // Opening the user profile activity using intent.
-
-                            *//*else{
-                                String msg = j.getString("msg");
-                                // Showing Echo Response Message Coming From Server.
-                                Toast.makeText(customer_names.this, msg, Toast.LENGTH_LONG).show();
-
-                            }*//*
-                        } catch (JSONException e) {
-                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                            e.printStackTrace();
-                        }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        // Hiding the progress dialog after all task complete.
-                        //     Toast.makeText(getContext(), volleyError.getMessage(), Toast.LENGTH_SHORT).show();
-                        //  lottie.setVisibility(View.GONE);
-                        NetworkDialog();
-                    }
-                }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                // Creating Map String Params.
-                Map<String, String> params = new HashMap<String, String>();
-                // Adding All values to Params.
-                // The firs argument should be same sa your MySQL database table columns.
-//                params.put("latitude", String.valueOf(Home_screen.currentLatitude));
-//                params.put("longitude", String.valueOf(Home_screen.currentLongitude));
-
-                return params;
-            }
-
-        };
-
-        // Creating RequestQueue.
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-
-        // Adding the StringRequest object into requestQueue.
-        requestQueue.add(stringRequest);
-
-    }
-
-    private void NetworkDialog() {
-        final Dialog dialogs = new Dialog(getContext());
-        dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialogs.setContentView(R.layout.networkdialog);
-        dialogs.setCanceledOnTouchOutside(false);
-        Button done = (Button) dialogs.findViewById(R.id.done);
-        done.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialogs.dismiss();
-                Login();
-
-            }
-        });
-        dialogs.show();
-    }*/
 
     @Override
     public void onPause() {
@@ -309,13 +224,11 @@ public class HomeFragment extends Fragment {
         public void run() {
 
             if (!pagerMoved) {
-
-                if (binding.viewpage.getCurrentItem() == binding.viewpage.getChildCount()) {
+                if (binding.viewpage.getCurrentItem() == binding.viewpage.getChildCount() - 1) {
                     binding.viewpage.setCurrentItem(0, true);
                 } else {
                     binding.viewpage.setCurrentItem(binding.viewpage.getCurrentItem() + 1, true);
                 }
-
                 h.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
             }
         }

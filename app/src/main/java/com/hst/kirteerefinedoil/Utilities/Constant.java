@@ -3,7 +3,8 @@ package com.hst.kirteerefinedoil.Utilities;
 public class Constant {
 
     public static final String domain = "https://foodoil.positivevision.in/api/";
-    public static final String LOGIN_URL = domain + "login/index.php";
+    public static final String LOGIN_URL = domain + "loginWithOtp/index.php";
+    public static final String LOGIN_WITH_PASSWORD = domain + "loginWithPassword/index.php";
     public static final String GET_USER_INFO = domain + "getUserInfo/index.php";
     public static final String ORDER_HISTORY = domain + "orderHistory/index.php";
     public static final String PRODUCT_LIST = domain + "productList/index.php";
@@ -18,6 +19,7 @@ public class Constant {
     public static final String PLACE_ORDER = domain + "placeOrder/index.php";
     public static final String CLEAR_CART = domain + "cartClearItem/index.php";
     public static final String UPDATE_ADDRESS = domain + "updateAddress/index.php";
+    public static final String UPDATE_PASSWORD = domain + "updatePassword/index.php";
     public static final String CANCEL_ORDER = domain + "orderCancel/index.php";
 
 }

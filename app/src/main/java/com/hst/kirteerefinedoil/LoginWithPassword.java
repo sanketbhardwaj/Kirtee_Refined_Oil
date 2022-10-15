@@ -3,17 +3,13 @@ package com.hst.kirteerefinedoil;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.view.LayoutInflater;
+import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,73 +17,54 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
 import com.hst.kirteerefinedoil.Utilities.Constant;
+import com.hst.kirteerefinedoil.databinding.ActivityLoginWithPasswordBinding;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Adapter_product_list extends RecyclerView.Adapter<Adapter_product_list.MyViewHolder> {
-    private final Context context;
+public class LoginWithPassword extends AppCompatActivity {
+    ActivityLoginWithPasswordBinding activityLoginWithPasswordBinding;
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
-    CartCount cartCount; //listener custom
-    private ArrayList<modelProduct> data = new ArrayList<>();
-
-    public Adapter_product_list(Context context, ArrayList<modelProduct> data, CartCount cartCount) {
-        this.context = context;
-        this.data = data;
-        this.cartCount = cartCount;
-
-    }
+    SessionManager session;
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_list_recycle, parent, false);
-        return new MyViewHolder(itemView);
-    }
-
-    @Override
-    public void onBindViewHolder(MyViewHolder viewHolder, int i) {
-        viewHolder.itemView.setTag(data.get(i));
-        final modelProduct d = data.get(i);
-        viewHolder.name.setText(d.getName());
-        viewHolder.description.setText(d.getDescription());
-        viewHolder.price.setText("₹ " + d.getPrice() + "/-");
-        Glide.with(context).load(data.get(i).getImg()).into(viewHolder.img);
-        viewHolder.addToCart.setOnClickListener(new View.OnClickListener() {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        activityLoginWithPasswordBinding = ActivityLoginWithPasswordBinding.inflate(getLayoutInflater());
+        View view = activityLoginWithPasswordBinding.getRoot();
+        setContentView(view);
+        session = new SessionManager(LoginWithPassword.this);
+        activityLoginWithPasswordBinding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (SplashScreen.Uid.equals("N")) {
-                    context.startActivity(new Intent(context, LoginActivityWithOtp.class));
+                if (activityLoginWithPasswordBinding.mobile.getText().toString().isEmpty()) {
+                    activityLoginWithPasswordBinding.mobile.setError("Please Enter the Mobile Number");
+                } else if (activityLoginWithPasswordBinding.password.getText().toString().isEmpty()) {
+                    activityLoginWithPasswordBinding.password.setError("Please Enter the Password");
                 } else {
-                    addToCart(d.getProductUid());
+                    Login();
                 }
-
             }
         });
+
     }
 
-    @Override
-    public int getItemCount() {
-        return data.size();
-    }
-
-    public void addToCart(String productUid) {
+    public void Login() {
         // Assigning Activity this to progress dialog.
-        progressDialog = new ProgressDialog(context, AlertDialog.THEME_HOLO_LIGHT);
+        progressDialog = new ProgressDialog(LoginWithPassword.this, AlertDialog.THEME_HOLO_LIGHT);
         // Showing progress dialog at user registration time.
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
 
         // Creating Volley newRequestQueue .
-        requestQueue = Volley.newRequestQueue(context);
+        requestQueue = Volley.newRequestQueue(LoginWithPassword.this);
         // Creating string request with post method.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.ADD_CART, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.LOGIN_WITH_PASSWORD, new Response.Listener<String>() {
             @Override
             public void onResponse(String ServerResponse) {
                 // Hiding the progress dialog after all task complete.
@@ -97,21 +74,34 @@ public class Adapter_product_list extends RecyclerView.Adapter<Adapter_product_l
                 try {
                     j = new JSONObject(ServerResponse);
                     String result = j.getString("result");
-                    //Cart_count = j.getString("cartCount");
-                    cartCount.cartCount(j.getString("cartCount"));
 
                     if (result.equals("Success")) {
                         // If response matched then show the toast.
                         // Finish the current Login activity
+                               /* SplashScreen.Uid = j.getString("userUid");
+                                SplashScreen.name = j.getString("name");
+                                SplashScreen.mobile_no = j.getString("mobile");
+                                SplashScreen.address = j.getString("address");
+                                SplashScreen.email = j.getString("email");
+                                SplashScreen.state = j.getString("state");
+                                SplashScreen.city = j.getString("city");
+                                SplashScreen.pinCode = j.getString("pincode");*/
+                        session.createLoginSession(j.getString("userUid"));
+                        SplashScreen.Uid = j.getString("userUid");
+                        SplashScreen.name = j.getString("name");
+                        SplashScreen.mobile_no = j.getString("mobile");
+                        SplashScreen.address = j.getString("address");
+                        SplashScreen.email = j.getString("email");
+                        SplashScreen.state = j.getString("state");
+                        SplashScreen.city = j.getString("city");
+                        SplashScreen.pinCode = j.getString("pincode");
 
-                        AlertDialog.Builder alert = new AlertDialog.Builder(context, AlertDialog.THEME_HOLO_LIGHT);
-                        alert.setTitle("Notice");
-                        alert.setPositiveButton("OK", null);
-                        alert.setMessage(j.getString("status"));
-                        alert.show();
+                        Intent intent = new Intent(LoginWithPassword.this, homeScreen.class);
+                        startActivity(intent);
+                        //  finish();
 
                     } else {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(context, AlertDialog.THEME_HOLO_LIGHT);
+                        AlertDialog.Builder alert = new AlertDialog.Builder(LoginWithPassword.this, AlertDialog.THEME_HOLO_LIGHT);
                         alert.setTitle("Notice");
                         alert.setMessage(j.getString("status"));
                         alert.setPositiveButton("OK", null);
@@ -129,7 +119,7 @@ public class Adapter_product_list extends RecyclerView.Adapter<Adapter_product_l
             public void onErrorResponse(VolleyError volleyError) {
                 // Hiding the progress dialog after all task complete.
                 progressDialog.dismiss();
-                NetworkDialog(productUid);
+                NetworkDialog();
             }
         }) {
 
@@ -142,24 +132,24 @@ public class Adapter_product_list extends RecyclerView.Adapter<Adapter_product_l
 
                 // Adding All values to Params.
                 // The firs argument should be same sa your MySQL database table columns.
-                params.put("userUid", SplashScreen.Uid);
-                params.put("productUid", productUid);
-
+                params.put("mobile", activityLoginWithPasswordBinding.mobile.getText().toString());
+                params.put("password", activityLoginWithPasswordBinding.password.getText().toString());
                 return params;
             }
 
         };
 
         // Creating RequestQueue.
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        RequestQueue requestQueue = Volley.newRequestQueue(LoginWithPassword.this);
 
         // Adding the StringRequest object into requestQueue.
         requestQueue.add(stringRequest);
 
     }
 
-    private void NetworkDialog(String productUid) {
-        final Dialog dialogs = new Dialog(context);
+
+    private void NetworkDialog() {
+        final Dialog dialogs = new Dialog(LoginWithPassword.this);
         dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogs.setContentView(R.layout.networkdialog);
         dialogs.setCanceledOnTouchOutside(false);
@@ -168,32 +158,12 @@ public class Adapter_product_list extends RecyclerView.Adapter<Adapter_product_l
             @Override
             public void onClick(View view) {
                 dialogs.dismiss();
-                addToCart(productUid);
+                Login();
 
             }
         });
         dialogs.show();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView name, description, price, addToCart;
-        ImageView img;
-
-
-        public MyViewHolder(View view) {
-            super(view);
-            name = itemView.findViewById(R.id.name);
-            description = itemView.findViewById(R.id.description);
-            price = itemView.findViewById(R.id.price);
-            img = itemView.findViewById(R.id.img);
-            addToCart = itemView.findViewById(R.id.addToCart);
-
-
-        }
-
-    }
 
 }
-
-
-

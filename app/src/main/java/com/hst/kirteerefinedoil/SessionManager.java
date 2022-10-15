@@ -51,7 +51,7 @@ public class SessionManager {
         editor.clear();
         editor.commit();
 
-        Intent i = new Intent(context, LoginActivity.class);
+        Intent i = new Intent(context, LoginWithBackground.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);

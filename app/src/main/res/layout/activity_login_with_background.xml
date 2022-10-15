@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sunflower"
+    tools:context=".LoginWithBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_20dp"
+            android:gravity="center"
+            android:text="Welcome \nTo\nKirtee Foods"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_32dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/loginWithOtp"
+            android:layout_width="match_parent"
+            android:layout_height="45sp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="20sp"
+            android:layout_marginEnd="20sp"
+            android:layout_marginBottom="@dimen/dimen_20dp"
+            android:background="@drawable/borderbutton"
+            android:foreground="@drawable/ripple_effect"
+            android:text="Login with otp"
+            android:textColor="#fff"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/loginWithPswd"
+            android:layout_width="match_parent"
+            android:layout_height="45sp"
+            android:layout_below="@id/loginWithOtp"
+            android:layout_marginStart="20sp"
+            android:layout_marginEnd="20sp"
+            android:layout_marginBottom="@dimen/dimen_50dp"
+            android:background="@drawable/borderbutton"
+            android:foreground="@drawable/ripple_effect"
+            android:text="Login with password"
+            android:textColor="#fff"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+</RelativeLayout>

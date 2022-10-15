@@ -15,6 +15,27 @@
         android:theme="@style/Theme.KirteeRefinedOil"
         tools:targetApi="31">
         <activity
+            android:name=".changePassword"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".LoginWithBackground"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".LoginWithPassword"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".contactUs"
             android:exported="false">
             <meta-data
@@ -57,7 +78,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".LoginActivityWithOtp"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

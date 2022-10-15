@@ -167,7 +167,7 @@ public class orderHistoryDetails extends AppCompatActivity {
 
     public void cancelOrder() {
         // Assigning Activity this to progress dialog.
-        progressDialog = new ProgressDialog(orderHistoryDetails.this);
+        progressDialog = new ProgressDialog(orderHistoryDetails.this, AlertDialog.THEME_HOLO_LIGHT);
         // Showing progress dialog at user registration time.
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
@@ -192,15 +192,16 @@ public class orderHistoryDetails extends AppCompatActivity {
                         // If response matched then show the toast.
                         // Finish the current Login activity
                         //dm.clear();
-                        AlertDialog.Builder alert = new AlertDialog.Builder(orderHistoryDetails.this);
+                        AlertDialog.Builder alert = new AlertDialog.Builder(orderHistoryDetails.this, AlertDialog.THEME_HOLO_LIGHT);
                         alert.setTitle("Notice");
                         alert.setPositiveButton("OK", null);
                         alert.setMessage(j.getString("status"));
                         alert.show();
+                        activityOrderHistoryDetailsBinding.cancelOrder.setVisibility(View.GONE);
                         //getCartList();
 
                     } else {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(orderHistoryDetails.this);
+                        AlertDialog.Builder alert = new AlertDialog.Builder(orderHistoryDetails.this, AlertDialog.THEME_HOLO_LIGHT);
                         alert.setTitle("Notice");
                         alert.setMessage(j.getString("status"));
                         alert.setPositiveButton("OK", null);
@@ -252,7 +253,7 @@ public class orderHistoryDetails extends AppCompatActivity {
         dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogs.setContentView(R.layout.networkdialog);
         dialogs.setCanceledOnTouchOutside(false);
-        Button done = (Button) dialogs.findViewById(R.id.done);
+        Button done = dialogs.findViewById(R.id.done);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
